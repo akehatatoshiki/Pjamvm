@@ -1,0 +1,7 @@
+src/interp/inlining.c:472:        /* Copy the test block from malloc-ed memory into
+src/interp/inlining.c:492:        /* Copy the test block from malloc-ed memory into
+src/interp/inlining.c:715:    /* The prospective sequence is generated in malloc-ed memory
+src/interp/inlining.c:991:    PrepareInfo *prepare_info = pc->operand.pntr;
+src/interp/inlining.c:998:        if(pc->handler == handler_entry_points[i][OPC_INLINE_REWRITER])
+src/interp/inlining.c:1007:    pc->operand = prepare_info->operand;
+src/interp/inlining.c:1011:    pc->handler = handler_entry_points[info->cache_depth][info->opcode];

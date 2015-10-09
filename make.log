@@ -1,0 +1,914 @@
+Making install in src
+make[1]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src' に入ります
+Making install in os
+make[2]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os' に入ります
+Making install in linux
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os/linux' に入ります
+Making install in x86_64
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os/linux/x86_64' に入ります
+/bin/bash ../../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../../src  -I../../../../src -I../../../../src   -g -O2 -MT init.lo -MD -MP -MF .deps/init.Tpo -c -o init.lo init.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../../src -I../../../../src -I../../../../src -g -O2 -MT init.lo -MD -MP -MF .deps/init.Tpo -c init.c  -fPIC -DPIC -o .libs/init.o
+mv -f .deps/init.Tpo .deps/init.Plo
+/bin/bash ../../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../../src  -I../../../../src -I../../../../src   -g -O2 -MT dll_md.lo -MD -MP -MF .deps/dll_md.Tpo -c -o dll_md.lo dll_md.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../../src -I../../../../src -I../../../../src -g -O2 -MT dll_md.lo -MD -MP -MF .deps/dll_md.Tpo -c dll_md.c  -fPIC -DPIC -o .libs/dll_md.o
+mv -f .deps/dll_md.Tpo .deps/dll_md.Plo
+/bin/bash ../../../../libtool   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../../src  -I../../../../src -I../../../../src  -I../../../../src -I../../../../src -g -O2 -MT callNative.lo -MD -MP -MF .deps/callNative.Tpo -c -o callNative.lo callNative.S
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../../src -I../../../../src -I../../../../src -I../../../../src -I../../../../src -g -O2 -MT callNative.lo -MD -MP -MF .deps/callNative.Tpo -c callNative.S  -fPIC -DPIC -o .libs/callNative.o
+mv -f .deps/callNative.Tpo .deps/callNative.Plo
+/bin/bash ../../../../libtool --tag=CC   --mode=link gcc  -g -O2   -o libnative.la  init.lo dll_md.lo callNative.lo  -lz -ldl -lm -lrt -lpthread 
+libtool: link: rm -fr  .libs/libnative.a .libs/libnative.la
+libtool: link: ar cru .libs/libnative.a .libs/init.o .libs/dll_md.o .libs/callNative.o 
+libtool: link: ranlib .libs/libnative.a
+libtool: link: ( cd ".libs" && rm -f "libnative.la" && ln -s "../libnative.la" "libnative.la" )
+make[5]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os/linux/x86_64' に入ります
+make[5]: `install-exec-am' に対して行うべき事はありません.
+make[5]: `install-data-am' に対して行うべき事はありません.
+make[5]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os/linux/x86_64' から出ます
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os/linux/x86_64' から出ます
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os/linux' に入ります
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src   -g -O2 -MT os.lo -MD -MP -MF .deps/os.Tpo -c -o os.lo os.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -g -O2 -MT os.lo -MD -MP -MF .deps/os.Tpo -c os.c  -fPIC -DPIC -o .libs/os.o
+mv -f .deps/os.Tpo .deps/os.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=link gcc  -g -O2   -o libos.la  os.lo  -lz -ldl -lm -lrt -lpthread 
+libtool: link: rm -fr  .libs/libos.a .libs/libos.la
+libtool: link: ar cru .libs/libos.a .libs/os.o 
+libtool: link: ranlib .libs/libos.a
+libtool: link: ( cd ".libs" && rm -f "libos.la" && ln -s "../libos.la" "libos.la" )
+make[5]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os/linux' に入ります
+make[5]: `install-exec-am' に対して行うべき事はありません.
+make[5]: `install-data-am' に対して行うべき事はありません.
+make[5]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os/linux' から出ます
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os/linux' から出ます
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os/linux' から出ます
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os' に入ります
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os' に入ります
+make[4]: `install-exec-am' に対して行うべき事はありません.
+make[4]: `install-data-am' に対して行うべき事はありません.
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os' から出ます
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os' から出ます
+make[2]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os' から出ます
+Making install in interp
+make[2]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/interp' に入ります
+Making install in engine
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/interp/engine' に入ります
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src/interp -I../../../src  -fno-reorder-blocks -g -O2 -MT interp.lo -MD -MP -MF .deps/interp.Tpo -c -o interp.lo interp.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -I../../../src/interp -I../../../src -fno-reorder-blocks -g -O2 -MT interp.lo -MD -MP -MF .deps/interp.Tpo -c interp.c  -fPIC -DPIC -o .libs/interp.o
+mv -f .deps/interp.Tpo .deps/interp.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src/interp -I../../../src  -fno-reorder-blocks -g -O2 -MT interp2.lo -MD -MP -MF .deps/interp2.Tpo -c -o interp2.lo interp2.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -I../../../src/interp -I../../../src -fno-reorder-blocks -g -O2 -MT interp2.lo -MD -MP -MF .deps/interp2.Tpo -c interp2.c  -fPIC -DPIC -o .libs/interp2.o
+mv -f .deps/interp2.Tpo .deps/interp2.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src/interp -I../../../src  -fno-reorder-blocks -g -O2 -MT relocatability.lo -MD -MP -MF .deps/relocatability.Tpo -c -o relocatability.lo relocatability.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -I../../../src/interp -I../../../src -fno-reorder-blocks -g -O2 -MT relocatability.lo -MD -MP -MF .deps/relocatability.Tpo -c relocatability.c  -fPIC -DPIC -o .libs/relocatability.o
+mv -f .deps/relocatability.Tpo .deps/relocatability.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=link gcc -fno-reorder-blocks -g -O2   -o libengine.la  interp.lo interp2.lo relocatability.lo  -lz -ldl -lm -lrt -lpthread 
+libtool: link: rm -fr  .libs/libengine.a .libs/libengine.la
+libtool: link: ar cru .libs/libengine.a .libs/interp.o .libs/interp2.o .libs/relocatability.o 
+libtool: link: ranlib .libs/libengine.a
+libtool: link: ( cd ".libs" && rm -f "libengine.la" && ln -s "../libengine.la" "libengine.la" )
+gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src/interp -I../../../src  -fno-reorder-blocks -g -O2 -MT compute_relocatability.o -MD -MP -MF .deps/compute_relocatability.Tpo -c -o compute_relocatability.o compute_relocatability.c
+mv -f .deps/compute_relocatability.Tpo .deps/compute_relocatability.Po
+/bin/bash ../../../libtool --tag=CC   --mode=link gcc -fno-reorder-blocks -g -O2   -o compute_relocatability compute_relocatability.o libengine.la -lz -ldl -lm -lrt -lpthread 
+libtool: link: gcc -fno-reorder-blocks -g -O2 -o compute_relocatability compute_relocatability.o  ./.libs/libengine.a -lz -ldl -lm -lrt -lpthread
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/interp/engine' に入ります
+make[4]: `install-exec-am' に対して行うべき事はありません.
+make[4]: `install-data-am' に対して行うべき事はありません.
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/interp/engine' から出ます
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/interp/engine' から出ます
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/interp' に入ります
+/bin/bash ../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../src  -I../../src -I../../src/interp/engine -I../../src   -g -O2 -MT direct.lo -MD -MP -MF .deps/direct.Tpo -c -o direct.lo direct.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../src -I../../src -I../../src/interp/engine -I../../src -g -O2 -MT direct.lo -MD -MP -MF .deps/direct.Tpo -c direct.c  -fPIC -DPIC -o .libs/direct.o
+mv -f .deps/direct.Tpo .deps/direct.Plo
+engine/compute_relocatability
+/bin/bash ../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../src  -I../../src -I../../src/interp/engine -I../../src   -g -O2 -MT inlining.lo -MD -MP -MF .deps/inlining.Tpo -c -o inlining.lo inlining.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../src -I../../src -I../../src/interp/engine -I../../src -g -O2 -MT inlining.lo -MD -MP -MF .deps/inlining.Tpo -c inlining.c  -fPIC -DPIC -o .libs/inlining.o
+mv -f .deps/inlining.Tpo .deps/inlining.Plo
+/bin/bash ../../libtool --tag=CC   --mode=link gcc  -g -O2   -o libinterp.la  direct.lo inlining.lo engine/libengine.la -lz -ldl -lm -lrt -lpthread 
+libtool: link: rm -fr  .libs/libinterp.a .libs/libinterp.la
+libtool: link: (cd .libs/libinterp.lax/libengine.a && ar x "/home/akehata/Pjamvm-2.0.0/src/interp/engine/.libs/libengine.a")
+libtool: link: ar cru .libs/libinterp.a .libs/direct.o .libs/inlining.o   .libs/libinterp.lax/libengine.a/interp.o .libs/libinterp.lax/libengine.a/interp2.o .libs/libinterp.lax/libengine.a/relocatability.o 
+libtool: link: ranlib .libs/libinterp.a
+libtool: link: rm -fr .libs/libinterp.lax
+libtool: link: ( cd ".libs" && rm -f "libinterp.la" && ln -s "../libinterp.la" "libinterp.la" )
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/interp' に入ります
+make[4]: `install-exec-am' に対して行うべき事はありません.
+make[4]: `install-data-am' に対して行うべき事はありません.
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/interp' から出ます
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/interp' から出ます
+make[2]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/interp' から出ます
+Making install in classlib
+make[2]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib' に入ります
+Making install in openjdk
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/openjdk' に入ります
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src   -g -O2 -MT thread.lo -MD -MP -MF .deps/thread.Tpo -c -o thread.lo thread.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -I../../../src -g -O2 -MT thread.lo -MD -MP -MF .deps/thread.Tpo -c thread.c  -fPIC -DPIC -o .libs/thread.o
+mv -f .deps/thread.Tpo .deps/thread.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src   -g -O2 -MT class.lo -MD -MP -MF .deps/class.Tpo -c -o class.lo class.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -I../../../src -g -O2 -MT class.lo -MD -MP -MF .deps/class.Tpo -c class.c  -fPIC -DPIC -o .libs/class.o
+class.c: In function 'classlibExternalClassName':
+class.c:173:9: warning: format '%llu' expects argument of type 'long long unsigned int', but argument 3 has type 'uint64_t' [-Wformat=]
+         int hash_len = sprintf(buff, "%llu", hash);
+         ^
+mv -f .deps/class.Tpo .deps/class.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src   -g -O2 -MT natives.lo -MD -MP -MF .deps/natives.Tpo -c -o natives.lo natives.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -I../../../src -g -O2 -MT natives.lo -MD -MP -MF .deps/natives.Tpo -c natives.c  -fPIC -DPIC -o .libs/natives.o
+mv -f .deps/natives.Tpo .deps/natives.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src   -g -O2 -MT excep.lo -MD -MP -MF .deps/excep.Tpo -c -o excep.lo excep.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -I../../../src -g -O2 -MT excep.lo -MD -MP -MF .deps/excep.Tpo -c excep.c  -fPIC -DPIC -o .libs/excep.o
+mv -f .deps/excep.Tpo .deps/excep.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src   -g -O2 -MT reflect.lo -MD -MP -MF .deps/reflect.Tpo -c -o reflect.lo reflect.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -I../../../src -g -O2 -MT reflect.lo -MD -MP -MF .deps/reflect.Tpo -c reflect.c  -fPIC -DPIC -o .libs/reflect.o
+mv -f .deps/reflect.Tpo .deps/reflect.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src   -g -O2 -MT dll.lo -MD -MP -MF .deps/dll.Tpo -c -o dll.lo dll.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -I../../../src -g -O2 -MT dll.lo -MD -MP -MF .deps/dll.Tpo -c dll.c  -fPIC -DPIC -o .libs/dll.o
+mv -f .deps/dll.Tpo .deps/dll.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src   -g -O2 -MT jni.lo -MD -MP -MF .deps/jni.Tpo -c -o jni.lo jni.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -I../../../src -g -O2 -MT jni.lo -MD -MP -MF .deps/jni.Tpo -c jni.c  -fPIC -DPIC -o .libs/jni.o
+mv -f .deps/jni.Tpo .deps/jni.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src   -g -O2 -MT jvm.lo -MD -MP -MF .deps/jvm.Tpo -c -o jvm.lo jvm.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -I../../../src -g -O2 -MT jvm.lo -MD -MP -MF .deps/jvm.Tpo -c jvm.c  -fPIC -DPIC -o .libs/jvm.o
+mv -f .deps/jvm.Tpo .deps/jvm.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src   -g -O2 -MT properties.lo -MD -MP -MF .deps/properties.Tpo -c -o properties.lo properties.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -I../../../src -g -O2 -MT properties.lo -MD -MP -MF .deps/properties.Tpo -c properties.c  -fPIC -DPIC -o .libs/properties.o
+mv -f .deps/properties.Tpo .deps/properties.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src   -g -O2 -MT management.lo -MD -MP -MF .deps/management.Tpo -c -o management.lo management.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -I../../../src -g -O2 -MT management.lo -MD -MP -MF .deps/management.Tpo -c management.c  -fPIC -DPIC -o .libs/management.o
+mv -f .deps/management.Tpo .deps/management.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src   -g -O2 -MT access.lo -MD -MP -MF .deps/access.Tpo -c -o access.lo access.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -I../../../src -g -O2 -MT access.lo -MD -MP -MF .deps/access.Tpo -c access.c  -fPIC -DPIC -o .libs/access.o
+mv -f .deps/access.Tpo .deps/access.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src   -g -O2 -MT frame.lo -MD -MP -MF .deps/frame.Tpo -c -o frame.lo frame.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -I../../../src -g -O2 -MT frame.lo -MD -MP -MF .deps/frame.Tpo -c frame.c  -fPIC -DPIC -o .libs/frame.o
+mv -f .deps/frame.Tpo .deps/frame.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src   -g -O2 -MT shutdown.lo -MD -MP -MF .deps/shutdown.Tpo -c -o shutdown.lo shutdown.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -I../../../src -g -O2 -MT shutdown.lo -MD -MP -MF .deps/shutdown.Tpo -c shutdown.c  -fPIC -DPIC -o .libs/shutdown.o
+mv -f .deps/shutdown.Tpo .deps/shutdown.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src   -g -O2 -MT alloc.lo -MD -MP -MF .deps/alloc.Tpo -c -o alloc.lo alloc.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -I../../../src -g -O2 -MT alloc.lo -MD -MP -MF .deps/alloc.Tpo -c alloc.c  -fPIC -DPIC -o .libs/alloc.o
+mv -f .deps/alloc.Tpo .deps/alloc.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src   -g -O2 -MT perf.lo -MD -MP -MF .deps/perf.Tpo -c -o perf.lo perf.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -I../../../src -g -O2 -MT perf.lo -MD -MP -MF .deps/perf.Tpo -c perf.c  -fPIC -DPIC -o .libs/perf.o
+mv -f .deps/perf.Tpo .deps/perf.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../src  -I../../../src -I../../../src   -g -O2 -MT mh.lo -MD -MP -MF .deps/mh.Tpo -c -o mh.lo mh.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../src -I../../../src -I../../../src -g -O2 -MT mh.lo -MD -MP -MF .deps/mh.Tpo -c mh.c  -fPIC -DPIC -o .libs/mh.o
+mv -f .deps/mh.Tpo .deps/mh.Plo
+/bin/bash ../../../libtool --tag=CC   --mode=link gcc  -g -O2   -o libclasslib.la  thread.lo class.lo natives.lo excep.lo reflect.lo dll.lo jni.lo jvm.lo properties.lo management.lo access.lo frame.lo shutdown.lo alloc.lo perf.lo mh.lo  -lz -ldl -lm -lrt -lpthread 
+libtool: link: rm -fr  .libs/libclasslib.a .libs/libclasslib.la
+libtool: link: ar cru .libs/libclasslib.a .libs/thread.o .libs/class.o .libs/natives.o .libs/excep.o .libs/reflect.o .libs/dll.o .libs/jni.o .libs/jvm.o .libs/properties.o .libs/management.o .libs/access.o .libs/frame.o .libs/shutdown.o .libs/alloc.o .libs/perf.o .libs/mh.o 
+libtool: link: ranlib .libs/libclasslib.a
+libtool: link: ( cd ".libs" && rm -f "libclasslib.la" && ln -s "../libclasslib.la" "libclasslib.la" )
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/openjdk' に入ります
+make[4]: `install-exec-am' に対して行うべき事はありません.
+make[4]: `install-data-am' に対して行うべき事はありません.
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/openjdk' から出ます
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/openjdk' から出ます
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib' に入ります
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib' に入ります
+make[4]: `install-exec-am' に対して行うべき事はありません.
+make[4]: `install-data-am' に対して行うべき事はありません.
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib' から出ます
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib' から出ます
+make[2]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib' から出ます
+make[2]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src' に入ります
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT alloc.lo -MD -MP -MF .deps/alloc.Tpo -c -o alloc.lo alloc.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT alloc.lo -MD -MP -MF .deps/alloc.Tpo -c alloc.c  -fPIC -DPIC -o .libs/alloc.o
+mv -f .deps/alloc.Tpo .deps/alloc.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT cast.lo -MD -MP -MF .deps/cast.Tpo -c -o cast.lo cast.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT cast.lo -MD -MP -MF .deps/cast.Tpo -c cast.c  -fPIC -DPIC -o .libs/cast.o
+mv -f .deps/cast.Tpo .deps/cast.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT class.lo -MD -MP -MF .deps/class.Tpo -c -o class.lo class.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT class.lo -MD -MP -MF .deps/class.Tpo -c class.c  -fPIC -DPIC -o .libs/class.o
+mv -f .deps/class.Tpo .deps/class.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT dll.lo -MD -MP -MF .deps/dll.Tpo -c -o dll.lo dll.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT dll.lo -MD -MP -MF .deps/dll.Tpo -c dll.c  -fPIC -DPIC -o .libs/dll.o
+mv -f .deps/dll.Tpo .deps/dll.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT excep.lo -MD -MP -MF .deps/excep.Tpo -c -o excep.lo excep.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT excep.lo -MD -MP -MF .deps/excep.Tpo -c excep.c  -fPIC -DPIC -o .libs/excep.o
+mv -f .deps/excep.Tpo .deps/excep.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT execute.lo -MD -MP -MF .deps/execute.Tpo -c -o execute.lo execute.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT execute.lo -MD -MP -MF .deps/execute.Tpo -c execute.c  -fPIC -DPIC -o .libs/execute.o
+mv -f .deps/execute.Tpo .deps/execute.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT hash.lo -MD -MP -MF .deps/hash.Tpo -c -o hash.lo hash.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT hash.lo -MD -MP -MF .deps/hash.Tpo -c hash.c  -fPIC -DPIC -o .libs/hash.o
+mv -f .deps/hash.Tpo .deps/hash.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT jni.lo -MD -MP -MF .deps/jni.Tpo -c -o jni.lo jni.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT jni.lo -MD -MP -MF .deps/jni.Tpo -c jni.c  -fPIC -DPIC -o .libs/jni.o
+jni.c: In function 'initJNIPrefs':
+jni.c:255:14: warning: comparison between pointer and integer [enabled by default]
+   if(p_table == -1){
+              ^
+jni.c: In function 'addJNIPrefUnlocked':
+jni.c:287:29: warning: assignment from incompatible pointer type [enabled by default]
+     p_table->hash[hash].obj = ref;
+                             ^
+jni.c: In function 'markJNIPersistentObjs':
+jni.c:464:1: warning: passing argument 1 of 'markJNIPersistentObj' from incompatible pointer type [enabled by default]
+ MARK_JNI_PERSISTENT_OBJ()
+ ^
+In file included from jni.c:31:0:
+jam.h:956:13: note: expected 'struct Object *' but argument is of type 'void **'
+ extern void markJNIPersistentObj(Object *ob);
+             ^
+jni.c: In function 'Jam_DeletePersisitenceObject':
+jni.c:728:84: warning: return makes integer from pointer without a cast [enabled by default]
+     if(!IS_PERSISTENCE) { jam_fprintf(stderr,"This process is not persistence\n"); return NULL;}
+                                                                                    ^
+jni.c:729:69: warning: return makes integer from pointer without a cast [enabled by default]
+     if(*key == '\0') { jam_fprintf(stderr,"NULL KEY error(set)\n"); return NULL; }
+                                                                     ^
+jni.c: At top level:
+jni.c:1545:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_SetPersistentObject,
+     ^
+jni.c:1545:5: warning: (near initialization for 'Jam_JNINativeInterface.NewGlobalRef') [enabled by default]
+jni.c:1546:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_GetPersistenceObject,
+     ^
+jni.c:1546:5: warning: (near initialization for 'Jam_JNINativeInterface.DeleteGlobalRef') [enabled by default]
+jni.c:1547:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_DeletePersisitenceObject,
+     ^
+jni.c:1547:5: warning: (near initialization for 'Jam_JNINativeInterface.DeleteLocalRef') [enabled by default]
+jni.c:1548:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_NewGlobalRef,
+     ^
+jni.c:1548:5: warning: (near initialization for 'Jam_JNINativeInterface.IsSameObject') [enabled by default]
+jni.c:1549:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_DeleteGlobalRef,
+     ^
+jni.c:1549:5: warning: (near initialization for 'Jam_JNINativeInterface.NewLocalRef') [enabled by default]
+jni.c:1550:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_DeleteLocalRef,
+     ^
+jni.c:1550:5: warning: (near initialization for 'Jam_JNINativeInterface.EnsureLocalCapacity') [enabled by default]
+jni.c:1551:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_IsSameObject,
+     ^
+jni.c:1551:5: warning: (near initialization for 'Jam_JNINativeInterface.AllocObject') [enabled by default]
+jni.c:1552:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_NewLocalRef,
+     ^
+jni.c:1552:5: warning: (near initialization for 'Jam_JNINativeInterface.NewObject') [enabled by default]
+jni.c:1553:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_EnsureLocalCapacity,
+     ^
+jni.c:1553:5: warning: (near initialization for 'Jam_JNINativeInterface.NewObjectV') [enabled by default]
+jni.c:1554:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_AllocObject,
+     ^
+jni.c:1554:5: warning: (near initialization for 'Jam_JNINativeInterface.NewObjectA') [enabled by default]
+jni.c:1555:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_NewObject,
+     ^
+jni.c:1555:5: warning: (near initialization for 'Jam_JNINativeInterface.GetObjectClass') [enabled by default]
+jni.c:1556:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_NewObjectV,
+     ^
+jni.c:1556:5: warning: (near initialization for 'Jam_JNINativeInterface.IsInstanceOf') [enabled by default]
+jni.c:1557:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_NewObjectA,
+     ^
+jni.c:1557:5: warning: (near initialization for 'Jam_JNINativeInterface.GetMethodID') [enabled by default]
+jni.c:1558:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_GetObjectClass,
+     ^
+jni.c:1558:5: warning: (near initialization for 'Jam_JNINativeInterface.CallObjectMethod') [enabled by default]
+jni.c:1559:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_IsInstanceOf,
+     ^
+jni.c:1559:5: warning: (near initialization for 'Jam_JNINativeInterface.CallObjectMethodV') [enabled by default]
+jni.c:1560:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_GetMethodID,
+     ^
+jni.c:1560:5: warning: (near initialization for 'Jam_JNINativeInterface.CallObjectMethodA') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+     METHODS(/*virtual*/),
+     ^
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallBooleanMethod') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallBooleanMethodV') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallBooleanMethodA') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallByteMethod') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallByteMethodV') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallByteMethodA') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallCharMethod') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallCharMethodV') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallCharMethodA') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallShortMethod') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallShortMethodV') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallShortMethodA') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallIntMethod') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallIntMethodV') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallIntMethodA') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallLongMethod') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallLongMethodV') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallLongMethodA') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallFloatMethod') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallFloatMethodV') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallFloatMethodA') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallDoubleMethod') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallDoubleMethodV') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallDoubleMethodA') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallVoidMethod') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallVoidMethodV') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallVoidMethodA') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualObjectMethod') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualObjectMethodV') [enabled by default]
+jni.c:1561:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1561:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualObjectMethodA') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+     METHODS(Nonvirtual),
+     ^
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualBooleanMethod') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualBooleanMethodV') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualBooleanMethodA') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualByteMethod') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualByteMethodV') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualByteMethodA') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualCharMethod') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualCharMethodV') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualCharMethodA') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualShortMethod') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualShortMethodV') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualShortMethodA') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualIntMethod') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualIntMethodV') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualIntMethodA') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualLongMethod') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualLongMethodV') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualLongMethodA') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualFloatMethod') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualFloatMethodV') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualFloatMethodA') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualDoubleMethod') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualDoubleMethodV') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualDoubleMethodA') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualVoidMethod') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualVoidMethodV') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.CallNonvirtualVoidMethodA') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.GetFieldID') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.GetObjectField') [enabled by default]
+jni.c:1562:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1562:5: warning: (near initialization for 'Jam_JNINativeInterface.GetBooleanField') [enabled by default]
+jni.c:1563:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_GetFieldID,
+     ^
+jni.c:1563:5: warning: (near initialization for 'Jam_JNINativeInterface.GetByteField') [enabled by default]
+jni.c:1564:5: warning: initialization from incompatible pointer type [enabled by default]
+     FIELDS(/*instance*/),
+     ^
+jni.c:1564:5: warning: (near initialization for 'Jam_JNINativeInterface.GetCharField') [enabled by default]
+jni.c:1564:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1564:5: warning: (near initialization for 'Jam_JNINativeInterface.GetShortField') [enabled by default]
+jni.c:1564:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1564:5: warning: (near initialization for 'Jam_JNINativeInterface.GetIntField') [enabled by default]
+jni.c:1564:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1564:5: warning: (near initialization for 'Jam_JNINativeInterface.GetLongField') [enabled by default]
+jni.c:1564:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1564:5: warning: (near initialization for 'Jam_JNINativeInterface.GetFloatField') [enabled by default]
+jni.c:1564:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1564:5: warning: (near initialization for 'Jam_JNINativeInterface.GetDoubleField') [enabled by default]
+jni.c:1564:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1564:5: warning: (near initialization for 'Jam_JNINativeInterface.SetObjectField') [enabled by default]
+jni.c:1564:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1564:5: warning: (near initialization for 'Jam_JNINativeInterface.SetBooleanField') [enabled by default]
+jni.c:1564:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1564:5: warning: (near initialization for 'Jam_JNINativeInterface.SetByteField') [enabled by default]
+jni.c:1564:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1564:5: warning: (near initialization for 'Jam_JNINativeInterface.SetCharField') [enabled by default]
+jni.c:1564:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1564:5: warning: (near initialization for 'Jam_JNINativeInterface.SetShortField') [enabled by default]
+jni.c:1564:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1564:5: warning: (near initialization for 'Jam_JNINativeInterface.SetIntField') [enabled by default]
+jni.c:1564:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1564:5: warning: (near initialization for 'Jam_JNINativeInterface.SetLongField') [enabled by default]
+jni.c:1564:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1564:5: warning: (near initialization for 'Jam_JNINativeInterface.SetFloatField') [enabled by default]
+jni.c:1564:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1564:5: warning: (near initialization for 'Jam_JNINativeInterface.SetDoubleField') [enabled by default]
+jni.c:1564:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1564:5: warning: (near initialization for 'Jam_JNINativeInterface.GetStaticMethodID') [enabled by default]
+jni.c:1564:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1564:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticObjectMethod') [enabled by default]
+jni.c:1564:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1564:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticObjectMethodV') [enabled by default]
+jni.c:1565:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_GetStaticMethodID,
+     ^
+jni.c:1565:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticObjectMethodA') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+     METHODS(Static),
+     ^
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticBooleanMethod') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticBooleanMethodV') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticBooleanMethodA') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticByteMethod') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticByteMethodV') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticByteMethodA') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticCharMethod') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticCharMethodV') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticCharMethodA') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticShortMethod') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticShortMethodV') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticShortMethodA') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticIntMethod') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticIntMethodV') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticIntMethodA') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticLongMethod') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticLongMethodV') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticLongMethodA') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticFloatMethod') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticFloatMethodV') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticFloatMethodA') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticDoubleMethod') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticDoubleMethodV') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticDoubleMethodA') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticVoidMethod') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticVoidMethodV') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.CallStaticVoidMethodA') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.GetStaticFieldID') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.GetStaticObjectField') [enabled by default]
+jni.c:1566:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1566:5: warning: (near initialization for 'Jam_JNINativeInterface.GetStaticBooleanField') [enabled by default]
+jni.c:1567:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_GetStaticFieldID,
+     ^
+jni.c:1567:5: warning: (near initialization for 'Jam_JNINativeInterface.GetStaticByteField') [enabled by default]
+jni.c:1568:5: warning: initialization from incompatible pointer type [enabled by default]
+     FIELDS(Static),
+     ^
+jni.c:1568:5: warning: (near initialization for 'Jam_JNINativeInterface.GetStaticCharField') [enabled by default]
+jni.c:1568:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1568:5: warning: (near initialization for 'Jam_JNINativeInterface.GetStaticShortField') [enabled by default]
+jni.c:1568:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1568:5: warning: (near initialization for 'Jam_JNINativeInterface.GetStaticIntField') [enabled by default]
+jni.c:1568:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1568:5: warning: (near initialization for 'Jam_JNINativeInterface.GetStaticLongField') [enabled by default]
+jni.c:1568:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1568:5: warning: (near initialization for 'Jam_JNINativeInterface.GetStaticFloatField') [enabled by default]
+jni.c:1568:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1568:5: warning: (near initialization for 'Jam_JNINativeInterface.GetStaticDoubleField') [enabled by default]
+jni.c:1568:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1568:5: warning: (near initialization for 'Jam_JNINativeInterface.SetStaticObjectField') [enabled by default]
+jni.c:1568:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1568:5: warning: (near initialization for 'Jam_JNINativeInterface.SetStaticBooleanField') [enabled by default]
+jni.c:1568:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1568:5: warning: (near initialization for 'Jam_JNINativeInterface.SetStaticByteField') [enabled by default]
+jni.c:1568:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1568:5: warning: (near initialization for 'Jam_JNINativeInterface.SetStaticCharField') [enabled by default]
+jni.c:1568:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1568:5: warning: (near initialization for 'Jam_JNINativeInterface.SetStaticShortField') [enabled by default]
+jni.c:1568:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1568:5: warning: (near initialization for 'Jam_JNINativeInterface.SetStaticIntField') [enabled by default]
+jni.c:1568:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1568:5: warning: (near initialization for 'Jam_JNINativeInterface.SetStaticLongField') [enabled by default]
+jni.c:1568:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1568:5: warning: (near initialization for 'Jam_JNINativeInterface.SetStaticFloatField') [enabled by default]
+jni.c:1568:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1568:5: warning: (near initialization for 'Jam_JNINativeInterface.SetStaticDoubleField') [enabled by default]
+jni.c:1568:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1568:5: warning: (near initialization for 'Jam_JNINativeInterface.NewString') [enabled by default]
+jni.c:1568:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1568:5: warning: (near initialization for 'Jam_JNINativeInterface.GetStringLength') [enabled by default]
+jni.c:1568:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1568:5: warning: (near initialization for 'Jam_JNINativeInterface.GetStringChars') [enabled by default]
+jni.c:1569:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_NewString,
+     ^
+jni.c:1569:5: warning: (near initialization for 'Jam_JNINativeInterface.ReleaseStringChars') [enabled by default]
+jni.c:1570:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_GetStringLength,
+     ^
+jni.c:1570:5: warning: (near initialization for 'Jam_JNINativeInterface.NewStringUTF') [enabled by default]
+jni.c:1571:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_GetStringChars,
+     ^
+jni.c:1571:5: warning: (near initialization for 'Jam_JNINativeInterface.GetStringUTFLength') [enabled by default]
+jni.c:1572:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_ReleaseStringChars,
+     ^
+jni.c:1572:5: warning: (near initialization for 'Jam_JNINativeInterface.GetStringUTFChars') [enabled by default]
+jni.c:1573:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_NewStringUTF,
+     ^
+jni.c:1573:5: warning: (near initialization for 'Jam_JNINativeInterface.ReleaseStringUTFChars') [enabled by default]
+jni.c:1575:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_GetStringUTFChars,
+     ^
+jni.c:1575:5: warning: (near initialization for 'Jam_JNINativeInterface.NewObjectArray') [enabled by default]
+jni.c:1576:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_ReleaseStringUTFChars,
+     ^
+jni.c:1576:5: warning: (near initialization for 'Jam_JNINativeInterface.GetObjectArrayElement') [enabled by default]
+jni.c:1577:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_GetArrayLength,
+     ^
+jni.c:1577:5: warning: (near initialization for 'Jam_JNINativeInterface.SetObjectArrayElement') [enabled by default]
+jni.c:1578:5: warning: initialization from incompatible pointer type [enabled by default]
+     ARRAY(New, Object,),
+     ^
+jni.c:1578:5: warning: (near initialization for 'Jam_JNINativeInterface.NewBooleanArray') [enabled by default]
+jni.c:1579:5: warning: initialization from incompatible pointer type [enabled by default]
+     ARRAY(Get, Object, Element),
+     ^
+jni.c:1579:5: warning: (near initialization for 'Jam_JNINativeInterface.NewByteArray') [enabled by default]
+jni.c:1580:5: warning: initialization from incompatible pointer type [enabled by default]
+     ARRAY(Set, Object, Element),
+     ^
+jni.c:1580:5: warning: (near initialization for 'Jam_JNINativeInterface.NewCharArray') [enabled by default]
+jni.c:1581:5: warning: initialization from incompatible pointer type [enabled by default]
+     ARRAY_OPS(New,),
+     ^
+jni.c:1581:5: warning: (near initialization for 'Jam_JNINativeInterface.GetBooleanArrayElements') [enabled by default]
+jni.c:1581:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1581:5: warning: (near initialization for 'Jam_JNINativeInterface.GetByteArrayElements') [enabled by default]
+jni.c:1581:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1581:5: warning: (near initialization for 'Jam_JNINativeInterface.GetCharArrayElements') [enabled by default]
+jni.c:1582:5: warning: initialization from incompatible pointer type [enabled by default]
+     ARRAY_OPS(Get, Elements),
+     ^
+jni.c:1582:5: warning: (near initialization for 'Jam_JNINativeInterface.GetShortArrayElements') [enabled by default]
+jni.c:1582:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1582:5: warning: (near initialization for 'Jam_JNINativeInterface.GetIntArrayElements') [enabled by default]
+jni.c:1582:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1582:5: warning: (near initialization for 'Jam_JNINativeInterface.GetLongArrayElements') [enabled by default]
+jni.c:1582:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1582:5: warning: (near initialization for 'Jam_JNINativeInterface.GetFloatArrayElements') [enabled by default]
+jni.c:1582:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1582:5: warning: (near initialization for 'Jam_JNINativeInterface.GetDoubleArrayElements') [enabled by default]
+jni.c:1582:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1582:5: warning: (near initialization for 'Jam_JNINativeInterface.ReleaseBooleanArrayElements') [enabled by default]
+jni.c:1582:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1582:5: warning: (near initialization for 'Jam_JNINativeInterface.ReleaseByteArrayElements') [enabled by default]
+jni.c:1582:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1582:5: warning: (near initialization for 'Jam_JNINativeInterface.ReleaseCharArrayElements') [enabled by default]
+jni.c:1583:5: warning: initialization from incompatible pointer type [enabled by default]
+     ARRAY_OPS(Release, Elements),
+     ^
+jni.c:1583:5: warning: (near initialization for 'Jam_JNINativeInterface.ReleaseShortArrayElements') [enabled by default]
+jni.c:1583:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1583:5: warning: (near initialization for 'Jam_JNINativeInterface.ReleaseIntArrayElements') [enabled by default]
+jni.c:1583:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1583:5: warning: (near initialization for 'Jam_JNINativeInterface.ReleaseLongArrayElements') [enabled by default]
+jni.c:1583:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1583:5: warning: (near initialization for 'Jam_JNINativeInterface.ReleaseFloatArrayElements') [enabled by default]
+jni.c:1583:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1583:5: warning: (near initialization for 'Jam_JNINativeInterface.ReleaseDoubleArrayElements') [enabled by default]
+jni.c:1583:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1583:5: warning: (near initialization for 'Jam_JNINativeInterface.GetBooleanArrayRegion') [enabled by default]
+jni.c:1583:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1583:5: warning: (near initialization for 'Jam_JNINativeInterface.GetByteArrayRegion') [enabled by default]
+jni.c:1583:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1583:5: warning: (near initialization for 'Jam_JNINativeInterface.GetCharArrayRegion') [enabled by default]
+jni.c:1584:5: warning: initialization from incompatible pointer type [enabled by default]
+     ARRAY_OPS(Get, Region),
+     ^
+jni.c:1584:5: warning: (near initialization for 'Jam_JNINativeInterface.GetShortArrayRegion') [enabled by default]
+jni.c:1584:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1584:5: warning: (near initialization for 'Jam_JNINativeInterface.GetIntArrayRegion') [enabled by default]
+jni.c:1584:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1584:5: warning: (near initialization for 'Jam_JNINativeInterface.GetLongArrayRegion') [enabled by default]
+jni.c:1584:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1584:5: warning: (near initialization for 'Jam_JNINativeInterface.GetFloatArrayRegion') [enabled by default]
+jni.c:1584:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1584:5: warning: (near initialization for 'Jam_JNINativeInterface.GetDoubleArrayRegion') [enabled by default]
+jni.c:1584:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1584:5: warning: (near initialization for 'Jam_JNINativeInterface.SetBooleanArrayRegion') [enabled by default]
+jni.c:1584:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1584:5: warning: (near initialization for 'Jam_JNINativeInterface.SetByteArrayRegion') [enabled by default]
+jni.c:1584:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1584:5: warning: (near initialization for 'Jam_JNINativeInterface.SetCharArrayRegion') [enabled by default]
+jni.c:1585:5: warning: initialization from incompatible pointer type [enabled by default]
+     ARRAY_OPS(Set, Region),
+     ^
+jni.c:1585:5: warning: (near initialization for 'Jam_JNINativeInterface.SetShortArrayRegion') [enabled by default]
+jni.c:1585:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1585:5: warning: (near initialization for 'Jam_JNINativeInterface.SetIntArrayRegion') [enabled by default]
+jni.c:1585:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1585:5: warning: (near initialization for 'Jam_JNINativeInterface.SetLongArrayRegion') [enabled by default]
+jni.c:1585:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1585:5: warning: (near initialization for 'Jam_JNINativeInterface.SetFloatArrayRegion') [enabled by default]
+jni.c:1585:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1585:5: warning: (near initialization for 'Jam_JNINativeInterface.SetDoubleArrayRegion') [enabled by default]
+jni.c:1585:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1585:5: warning: (near initialization for 'Jam_JNINativeInterface.RegisterNatives') [enabled by default]
+jni.c:1585:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1585:5: warning: (near initialization for 'Jam_JNINativeInterface.UnregisterNatives') [enabled by default]
+jni.c:1585:5: warning: initialization from incompatible pointer type [enabled by default]
+jni.c:1585:5: warning: (near initialization for 'Jam_JNINativeInterface.MonitorEnter') [enabled by default]
+jni.c:1586:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_RegisterNatives,
+     ^
+jni.c:1586:5: warning: (near initialization for 'Jam_JNINativeInterface.MonitorExit') [enabled by default]
+jni.c:1587:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_UnregisterNatives,
+     ^
+jni.c:1587:5: warning: (near initialization for 'Jam_JNINativeInterface.GetJavaVM') [enabled by default]
+jni.c:1588:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_MonitorEnter,
+     ^
+jni.c:1588:5: warning: (near initialization for 'Jam_JNINativeInterface.GetStringRegion') [enabled by default]
+jni.c:1589:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_MonitorExit,
+     ^
+jni.c:1589:5: warning: (near initialization for 'Jam_JNINativeInterface.GetStringUTFRegion') [enabled by default]
+jni.c:1590:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_GetJavaVM,
+     ^
+jni.c:1590:5: warning: (near initialization for 'Jam_JNINativeInterface.GetPrimitiveArrayCritical') [enabled by default]
+jni.c:1591:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_GetStringRegion,
+     ^
+jni.c:1591:5: warning: (near initialization for 'Jam_JNINativeInterface.ReleasePrimitiveArrayCritical') [enabled by default]
+jni.c:1592:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_GetStringUTFRegion,
+     ^
+jni.c:1592:5: warning: (near initialization for 'Jam_JNINativeInterface.GetStringCritical') [enabled by default]
+jni.c:1593:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_GetPrimitiveArrayCritical,
+     ^
+jni.c:1593:5: warning: (near initialization for 'Jam_JNINativeInterface.ReleaseStringCritical') [enabled by default]
+jni.c:1594:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_ReleasePrimitiveArrayCritical,
+     ^
+jni.c:1594:5: warning: (near initialization for 'Jam_JNINativeInterface.NewWeakGlobalRef') [enabled by default]
+jni.c:1595:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_GetStringCritical,
+     ^
+jni.c:1595:5: warning: (near initialization for 'Jam_JNINativeInterface.DeleteWeakGlobalRef') [enabled by default]
+jni.c:1596:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_ReleaseStringCritical,
+     ^
+jni.c:1596:5: warning: (near initialization for 'Jam_JNINativeInterface.ExceptionCheck') [enabled by default]
+jni.c:1597:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_NewWeakGlobalRef,
+     ^
+jni.c:1597:5: warning: (near initialization for 'Jam_JNINativeInterface.NewDirectByteBuffer') [enabled by default]
+jni.c:1598:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_DeleteWeakGlobalRef,
+     ^
+jni.c:1598:5: warning: (near initialization for 'Jam_JNINativeInterface.GetDirectBufferAddress') [enabled by default]
+jni.c:1599:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_ExceptionCheck,
+     ^
+jni.c:1599:5: warning: (near initialization for 'Jam_JNINativeInterface.GetDirectBufferCapacity') [enabled by default]
+jni.c:1600:5: warning: initialization from incompatible pointer type [enabled by default]
+     Jam_NewDirectByteBuffer,
+     ^
+jni.c:1600:5: warning: (near initialization for 'Jam_JNINativeInterface.GetObjectRefType') [enabled by default]
+jni.c:1601:5: warning: excess elements in struct initializer [enabled by default]
+     Jam_GetDirectBufferAddress,
+     ^
+jni.c:1601:5: warning: (near initialization for 'Jam_JNINativeInterface') [enabled by default]
+jni.c:1602:5: warning: excess elements in struct initializer [enabled by default]
+     Jam_GetDirectBufferCapacity,
+     ^
+jni.c:1602:5: warning: (near initialization for 'Jam_JNINativeInterface') [enabled by default]
+jni.c:1604:1: warning: excess elements in struct initializer [enabled by default]
+ };
+ ^
+jni.c:1604:1: warning: (near initialization for 'Jam_JNINativeInterface') [enabled by default]
+mv -f .deps/jni.Tpo .deps/jni.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT lock.lo -MD -MP -MF .deps/lock.Tpo -c -o lock.lo lock.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT lock.lo -MD -MP -MF .deps/lock.Tpo -c lock.c  -fPIC -DPIC -o .libs/lock.o
+mv -f .deps/lock.Tpo .deps/lock.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT natives.lo -MD -MP -MF .deps/natives.Tpo -c -o natives.lo natives.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT natives.lo -MD -MP -MF .deps/natives.Tpo -c natives.c  -fPIC -DPIC -o .libs/natives.o
+mv -f .deps/natives.Tpo .deps/natives.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT reflect.lo -MD -MP -MF .deps/reflect.Tpo -c -o reflect.lo reflect.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT reflect.lo -MD -MP -MF .deps/reflect.Tpo -c reflect.c  -fPIC -DPIC -o .libs/reflect.o
+mv -f .deps/reflect.Tpo .deps/reflect.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT resolve.lo -MD -MP -MF .deps/resolve.Tpo -c -o resolve.lo resolve.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT resolve.lo -MD -MP -MF .deps/resolve.Tpo -c resolve.c  -fPIC -DPIC -o .libs/resolve.o
+mv -f .deps/resolve.Tpo .deps/resolve.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT string.lo -MD -MP -MF .deps/string.Tpo -c -o string.lo string.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT string.lo -MD -MP -MF .deps/string.Tpo -c string.c  -fPIC -DPIC -o .libs/string.o
+mv -f .deps/string.Tpo .deps/string.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT thread.lo -MD -MP -MF .deps/thread.Tpo -c -o thread.lo thread.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT thread.lo -MD -MP -MF .deps/thread.Tpo -c thread.c  -fPIC -DPIC -o .libs/thread.o
+mv -f .deps/thread.Tpo .deps/thread.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT utf8.lo -MD -MP -MF .deps/utf8.Tpo -c -o utf8.lo utf8.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT utf8.lo -MD -MP -MF .deps/utf8.Tpo -c utf8.c  -fPIC -DPIC -o .libs/utf8.o
+mv -f .deps/utf8.Tpo .deps/utf8.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT zip.lo -MD -MP -MF .deps/zip.Tpo -c -o zip.lo zip.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT zip.lo -MD -MP -MF .deps/zip.Tpo -c zip.c  -fPIC -DPIC -o .libs/zip.o
+mv -f .deps/zip.Tpo .deps/zip.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT properties.lo -MD -MP -MF .deps/properties.Tpo -c -o properties.lo properties.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT properties.lo -MD -MP -MF .deps/properties.Tpo -c properties.c  -fPIC -DPIC -o .libs/properties.o
+mv -f .deps/properties.Tpo .deps/properties.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT dll_ffi.lo -MD -MP -MF .deps/dll_ffi.Tpo -c -o dll_ffi.lo dll_ffi.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT dll_ffi.lo -MD -MP -MF .deps/dll_ffi.Tpo -c dll_ffi.c  -fPIC -DPIC -o .libs/dll_ffi.o
+mv -f .deps/dll_ffi.Tpo .deps/dll_ffi.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT access.lo -MD -MP -MF .deps/access.Tpo -c -o access.lo access.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT access.lo -MD -MP -MF .deps/access.Tpo -c access.c  -fPIC -DPIC -o .libs/access.o
+mv -f .deps/access.Tpo .deps/access.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT frame.lo -MD -MP -MF .deps/frame.Tpo -c -o frame.lo frame.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT frame.lo -MD -MP -MF .deps/frame.Tpo -c frame.c  -fPIC -DPIC -o .libs/frame.o
+mv -f .deps/frame.Tpo .deps/frame.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT init.lo -MD -MP -MF .deps/init.Tpo -c -o init.lo init.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT init.lo -MD -MP -MF .deps/init.Tpo -c init.c  -fPIC -DPIC -o .libs/init.o
+mv -f .deps/init.Tpo .deps/init.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT hooks.lo -MD -MP -MF .deps/hooks.Tpo -c -o hooks.lo hooks.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT hooks.lo -MD -MP -MF .deps/hooks.Tpo -c hooks.c  -fPIC -DPIC -o .libs/hooks.o
+mv -f .deps/hooks.Tpo .deps/hooks.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT symbol.lo -MD -MP -MF .deps/symbol.Tpo -c -o symbol.lo symbol.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT symbol.lo -MD -MP -MF .deps/symbol.Tpo -c symbol.c  -fPIC -DPIC -o .libs/symbol.o
+mv -f .deps/symbol.Tpo .deps/symbol.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT shutdown.lo -MD -MP -MF .deps/shutdown.Tpo -c -o shutdown.lo shutdown.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT shutdown.lo -MD -MP -MF .deps/shutdown.Tpo -c shutdown.c  -fPIC -DPIC -o .libs/shutdown.o
+mv -f .deps/shutdown.Tpo .deps/shutdown.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT time.lo -MD -MP -MF .deps/time.Tpo -c -o time.lo time.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT time.lo -MD -MP -MF .deps/time.Tpo -c time.c  -fPIC -DPIC -o .libs/time.o
+mv -f .deps/time.Tpo .deps/time.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT sig.lo -MD -MP -MF .deps/sig.Tpo -c -o sig.lo sig.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT sig.lo -MD -MP -MF .deps/sig.Tpo -c sig.c  -fPIC -DPIC -o .libs/sig.o
+mv -f .deps/sig.Tpo .deps/sig.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT stubs.lo -MD -MP -MF .deps/stubs.Tpo -c -o stubs.lo stubs.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT stubs.lo -MD -MP -MF .deps/stubs.Tpo -c stubs.c  -fPIC -DPIC -o .libs/stubs.o
+mv -f .deps/stubs.Tpo .deps/stubs.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT jni-stubs.lo -MD -MP -MF .deps/jni-stubs.Tpo -c -o jni-stubs.lo jni-stubs.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT jni-stubs.lo -MD -MP -MF .deps/jni-stubs.Tpo -c jni-stubs.c  -fPIC -DPIC -o .libs/jni-stubs.o
+mv -f .deps/jni-stubs.Tpo .deps/jni-stubs.Plo
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT parson.lo -MD -MP -MF .deps/parson.Tpo -c -o parson.lo parson.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT parson.lo -MD -MP -MF .deps/parson.Tpo -c parson.c  -fPIC -DPIC -o .libs/parson.o
+mv -f .deps/parson.Tpo .deps/parson.Plo
+/bin/bash ../libtool --tag=CC   --mode=link gcc  -g -O2   -o libcore.la  alloc.lo cast.lo class.lo dll.lo excep.lo execute.lo hash.lo jni.lo lock.lo natives.lo reflect.lo resolve.lo string.lo thread.lo utf8.lo zip.lo properties.lo dll_ffi.lo access.lo frame.lo init.lo hooks.lo symbol.lo shutdown.lo time.lo sig.lo stubs.lo jni-stubs.lo parson.lo interp/libinterp.la os/linux/x86_64/libnative.la os/linux/libos.la classlib/openjdk/libclasslib.la -lz -ldl -lm -lrt -lpthread 
+libtool: link: rm -fr  .libs/libcore.a .libs/libcore.la
+libtool: link: (cd .libs/libcore.lax/libinterp.a && ar x "/home/akehata/Pjamvm-2.0.0/src/interp/.libs/libinterp.a")
+libtool: link: (cd .libs/libcore.lax/libnative.a && ar x "/home/akehata/Pjamvm-2.0.0/src/os/linux/x86_64/.libs/libnative.a")
+libtool: link: (cd .libs/libcore.lax/libos.a && ar x "/home/akehata/Pjamvm-2.0.0/src/os/linux/.libs/libos.a")
+libtool: link: (cd .libs/libcore.lax/libclasslib.a && ar x "/home/akehata/Pjamvm-2.0.0/src/classlib/openjdk/.libs/libclasslib.a")
+copying selected object files to avoid basename conflicts...
+libtool: link: ln .libs/libcore.lax/libnative.a/init.o .libs/libcore.lax/lt1-init.o || cp .libs/libcore.lax/libnative.a/init.o .libs/libcore.lax/lt1-init.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/access.o .libs/libcore.lax/lt2-access.o || cp .libs/libcore.lax/libclasslib.a/access.o .libs/libcore.lax/lt2-access.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/alloc.o .libs/libcore.lax/lt3-alloc.o || cp .libs/libcore.lax/libclasslib.a/alloc.o .libs/libcore.lax/lt3-alloc.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/class.o .libs/libcore.lax/lt4-class.o || cp .libs/libcore.lax/libclasslib.a/class.o .libs/libcore.lax/lt4-class.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/dll.o .libs/libcore.lax/lt5-dll.o || cp .libs/libcore.lax/libclasslib.a/dll.o .libs/libcore.lax/lt5-dll.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/excep.o .libs/libcore.lax/lt6-excep.o || cp .libs/libcore.lax/libclasslib.a/excep.o .libs/libcore.lax/lt6-excep.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/frame.o .libs/libcore.lax/lt7-frame.o || cp .libs/libcore.lax/libclasslib.a/frame.o .libs/libcore.lax/lt7-frame.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/jni.o .libs/libcore.lax/lt8-jni.o || cp .libs/libcore.lax/libclasslib.a/jni.o .libs/libcore.lax/lt8-jni.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/natives.o .libs/libcore.lax/lt9-natives.o || cp .libs/libcore.lax/libclasslib.a/natives.o .libs/libcore.lax/lt9-natives.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/properties.o .libs/libcore.lax/lt10-properties.o || cp .libs/libcore.lax/libclasslib.a/properties.o .libs/libcore.lax/lt10-properties.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/reflect.o .libs/libcore.lax/lt11-reflect.o || cp .libs/libcore.lax/libclasslib.a/reflect.o .libs/libcore.lax/lt11-reflect.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/shutdown.o .libs/libcore.lax/lt12-shutdown.o || cp .libs/libcore.lax/libclasslib.a/shutdown.o .libs/libcore.lax/lt12-shutdown.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/thread.o .libs/libcore.lax/lt13-thread.o || cp .libs/libcore.lax/libclasslib.a/thread.o .libs/libcore.lax/lt13-thread.o
+libtool: link: ar cru .libs/libcore.a .libs/alloc.o .libs/cast.o .libs/class.o .libs/dll.o .libs/excep.o .libs/execute.o .libs/hash.o .libs/jni.o .libs/lock.o .libs/natives.o .libs/reflect.o .libs/resolve.o .libs/string.o .libs/thread.o .libs/utf8.o .libs/zip.o .libs/properties.o .libs/dll_ffi.o .libs/access.o .libs/frame.o .libs/init.o .libs/hooks.o .libs/symbol.o .libs/shutdown.o .libs/time.o .libs/sig.o .libs/stubs.o .libs/jni-stubs.o .libs/parson.o .libs/libcore.lax/libinterp.a/direct.o .libs/libcore.lax/libinterp.a/inlining.o .libs/libcore.lax/libinterp.a/interp.o .libs/libcore.lax/libinterp.a/interp2.o .libs/libcore.lax/libinterp.a/relocatability.o .libs/libcore.lax/libnative.a/callNative.o .libs/libcore.lax/libnative.a/dll_md.o .libs/libcore.lax/lt1-init.o .libs/libcore.lax/libos.a/os.o .libs/libcore.lax/lt2-access.o .libs/libcore.lax/lt3-alloc.o .libs/libcore.lax/lt4-class.o .libs/libcore.lax/lt5-dll.o .libs/libcore.lax/lt6-excep.o .libs/libcore.lax/lt7-frame.o .libs/libcore.lax/lt8-jni.o .libs/libcore.lax/libclasslib.a/jvm.o .libs/libcore.lax/libclasslib.a/management.o .libs/libcore.lax/libclasslib.a/mh.o .libs/libcore.lax/lt9-natives.o .libs/libcore.lax/libclasslib.a/perf.o .libs/libcore.lax/lt10-properties.o .libs/libcore.lax/lt11-reflect.o .libs/libcore.lax/lt12-shutdown.o .libs/libcore.lax/lt13-thread.o
+libtool: link: ranlib .libs/libcore.a
+libtool: link: rm -fr .libs/libcore.lax .libs/libcore.lax
+libtool: link: ( cd ".libs" && rm -f "libcore.la" && ln -s "../libcore.la" "libcore.la" )
+/bin/bash ../libtool --tag=CC   --mode=link gcc  -g -O2 -avoid-version  -o libjvm.la -rpath /usr/local/jamvm/lib  libcore.la -lz -ldl -lm -lrt -lpthread 
+libtool: link: rm -fr  .libs/libjvm.la .libs/libjvm.lai .libs/libjvm.so
+libtool: link: gcc -shared  -fPIC -DPIC  -Wl,--whole-archive ./.libs/libcore.a -Wl,--no-whole-archive  -lz -ldl -lm -lrt -lpthread  -O2   -Wl,-soname -Wl,libjvm.so -o .libs/libjvm.so
+libtool: link: ( cd ".libs" && rm -f "libjvm.la" && ln -s "../libjvm.la" "libjvm.la" )
+gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT jam.o -MD -MP -MF .deps/jam.Tpo -c -o jam.o jam.c
+jam.c: In function ‘parseCommandLine’:
+jam.c:215:9: warning: passing argument 1 of ‘json_object_get_string’ from incompatible pointer type [enabled by default]
+         args->imgpath = json_object_get_string(root,"imgpath");
+         ^
+In file included from jam.c:34:0:
+parson.h:96:15: note: expected ‘const struct JSON_Object *’ but argument is of type ‘struct JSON_Value *’
+ const char  * json_object_get_string (const JSON_Object *object, const char *name);
+               ^
+jam.c:215:23: warning: assignment discards ‘const’ qualifier from pointer target type [enabled by default]
+         args->imgpath = json_object_get_string(root,"imgpath");
+                       ^
+jam.c:216:9: warning: passing argument 1 of ‘json_object_get_string’ from incompatible pointer type [enabled by default]
+         args->tablepath = json_object_get_string(root,"tablepath");
+         ^
+In file included from jam.c:34:0:
+parson.h:96:15: note: expected ‘const struct JSON_Object *’ but argument is of type ‘struct JSON_Value *’
+ const char  * json_object_get_string (const JSON_Object *object, const char *name);
+               ^
+jam.c:216:25: warning: assignment discards ‘const’ qualifier from pointer target type [enabled by default]
+         args->tablepath = json_object_get_string(root,"tablepath");
+                         ^
+jam.c:217:9: warning: passing argument 1 of ‘json_object_get_number’ from incompatible pointer type [enabled by default]
+         args->max_heap = (int) json_object_get_number(root,"heapsize");
+         ^
+In file included from jam.c:34:0:
+parson.h:99:15: note: expected ‘const struct JSON_Object *’ but argument is of type ‘struct JSON_Value *’
+ double        json_object_get_number (const JSON_Object *object, const char *name); /* returns 0 on fail */
+               ^
+mv -f .deps/jam.Tpo .deps/jam.Po
+/bin/bash ../libtool --tag=CC   --mode=link gcc  -g -O2   -o jamvm jam.o libcore.la -lz -ldl -lm -lrt -lpthread 
+libtool: link: gcc -g -O2 -o jamvm jam.o  ./.libs/libcore.a -lz -ldl -lm -lrt -lpthread
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src' に入ります
+ /bin/mkdir -p '/usr/local/jamvm/lib'
+ /bin/bash ../libtool   --mode=install /usr/bin/install -c   libjvm.la '/usr/local/jamvm/lib'
+libtool: install: /usr/bin/install -c .libs/libjvm.so /usr/local/jamvm/lib/libjvm.so
+libtool: install: /usr/bin/install -c .libs/libjvm.lai /usr/local/jamvm/lib/libjvm.la
+libtool: finish: PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/sbin" ldconfig -n /usr/local/jamvm/lib
+----------------------------------------------------------------------
+Libraries have been installed in:
+   /usr/local/jamvm/lib
+
+If you ever happen to want to link against installed libraries
+in a given directory, LIBDIR, you must either use libtool, and
+specify the full pathname of the library, or use the `-LLIBDIR'
+flag during linking and do at least one of the following:
+   - add LIBDIR to the `LD_LIBRARY_PATH' environment variable
+     during execution
+   - add LIBDIR to the `LD_RUN_PATH' environment variable
+     during linking
+   - use the `-Wl,-rpath -Wl,LIBDIR' linker flag
+   - have your system administrator add LIBDIR to `/etc/ld.so.conf'
+
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+----------------------------------------------------------------------
+ /bin/mkdir -p '/usr/local/jamvm/bin'
+  /bin/bash ../libtool   --mode=install /usr/bin/install -c jamvm '/usr/local/jamvm/bin'
+libtool: install: /usr/bin/install -c jamvm /usr/local/jamvm/bin/jamvm
+ /bin/mkdir -p '/usr/local/jamvm/include'
+ /usr/bin/install -c -m 644 jni.h '/usr/local/jamvm/include'
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src' から出ます
+make[2]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src' から出ます
+make[1]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src' から出ます
+make[1]: ディレクトリ `/home/akehata/Pjamvm-2.0.0' に入ります
+make[2]: ディレクトリ `/home/akehata/Pjamvm-2.0.0' に入ります
+make[2]: `install-exec-am' に対して行うべき事はありません.
+make[2]: `install-data-am' に対して行うべき事はありません.
+make[2]: ディレクトリ `/home/akehata/Pjamvm-2.0.0' から出ます
+make[1]: ディレクトリ `/home/akehata/Pjamvm-2.0.0' から出ます

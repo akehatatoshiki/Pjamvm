@@ -1,0 +1,265 @@
+src/access.c:128:    return checkMethodOrFieldAccess(mb->access_flags, mb->class, class);
+src/alloc.c:717:    slot = frame->ostack + frame->mb->max_stack;
+src/alloc.c:721:            TRACE_GC("Scanning %s.%s\n", CLASS_CB(frame->mb->class)->name,
+src/alloc.c:722:                     frame->mb->name);
+src/alloc.c:727:            markConservativeRoot((Object*)frame->mb->class);
+src/alloc.c:800:            for(idmb = entry->idmb_list; idmb != NULL; idmb = idmb->next) {
+src/alloc.c:801:                Object *ob = idmb->appendix;
+src/alloc.c:1496:            for(idmb = entry->idmb_list; idmb != NULL; idmb = idmb->next) {
+src/alloc.c:1497:                Object **ob = &idmb->appendix;
+src/class.c:1145:       char *sig = mb->type;
+src/class.c:1150:       if(mb->access_flags & ACC_STATIC)
+src/class.c:1151:           mb->args_count = count;
+src/class.c:1153:           mb->args_count = count + 1;
+src/class.c:1155:       mb->class = class;
+src/class.c:1158:       if(mb->access_flags & ACC_ABSTRACT) {
+src/class.c:1159:           mb->code_size = sizeof(abstract_method);
+src/class.c:1160:           mb->code = abstract_method;
+src/class.c:1163:       if(mb->access_flags & ACC_NATIVE) {
+src/class.c:1168:           mb->native_invoker = &resolveNativeWrapper;
+src/class.c:1174:           mb->max_locals = mb->args_count;
+src/class.c:1175:           mb->max_stack = 0;
+src/class.c:1181:       if((mb->access_flags & (ACC_STATIC | ACC_PRIVATE)) ||
+src/class.c:1182:                              (mb->name[0] == '<'))
+src/class.c:1188:           if(mb->name == spr_mthd_tbl[j]->name &&
+src/class.c:1189:                        mb->type == spr_mthd_tbl[j]->type &&
+src/class.c:1191:               mb->method_table_index = spr_mthd_tbl[j]->method_table_index;
+src/class.c:1196:           mb->method_table_index = spr_mthd_tbl_sze + new_methods_count++;
+src/class.c:1288:               if((intf_mb->access_flags & (ACC_STATIC | ACC_PRIVATE)) ||
+src/class.c:1289:                      (intf_mb->name[0] == '<'))
+src/class.c:1297:                   if(intf_mb->name == method_table[mtbl_idx]->name &&
+src/class.c:1298:                           intf_mb->type == method_table[mtbl_idx]->type)
+src/class.c:1306:                   if(!(mb->access_flags & ACC_MIRANDA) ||
+src/class.c:1307:                                      mb->flags & MB_DEFAULT_CONFLICT) {
+src/class.c:1318:                   if(intf_mb->name == mirandas[mrnda_idx].mb->name &&
+src/class.c:1319:                               intf_mb->type == mirandas[mrnda_idx].mb->type)
+src/class.c:1338:                       if(((mtbl_mb->access_flags & ACC_ABSTRACT)
+src/class.c:1339:                                   && (intf_mb->access_flags & ACC_ABSTRACT))
+src/class.c:1340:                             || mtbl_mb->miranda_mb->class == interface
+src/class.c:1341:                             || implements(interface, mtbl_mb->miranda_mb->class)) {
+src/class.c:1346:                       if(!implements(mtbl_mb->miranda_mb->class, interface))
+src/class.c:1378:                   if(!((mrnda_mb->access_flags & ACC_ABSTRACT)
+src/class.c:1379:                                && (intf_mb->access_flags & ACC_ABSTRACT))
+src/class.c:1381:                         && mrnda_mb->class != interface
+src/class.c:1382:                         && !implements(interface, mrnda_mb->class)) {
+src/class.c:1384:                       if(implements(mrnda_mb->class, interface))
+src/class.c:1426:               mb->class = class;
+src/class.c:1427:               mb->name = intf_mb->name;
+src/class.c:1428:               mb->type = intf_mb->type;
+src/class.c:1429:               mb->max_stack = intf_mb->max_stack;
+src/class.c:1430:               mb->max_locals = intf_mb->max_locals;
+src/class.c:1431:               mb->args_count = intf_mb->args_count;
+src/class.c:1432:               mb->method_table_index = mirandas[i].mtbl_idx;
+src/class.c:1433:               mb->access_flags = intf_mb->access_flags | ACC_MIRANDA;
+src/class.c:1436:                   mb->flags = MB_DEFAULT_CONFLICT;
+src/class.c:1437:                   mb->code_size = sizeof(abstract_method);
+src/class.c:1438:                   mb->code = abstract_method;
+src/class.c:1440:                   mb->miranda_mb = intf_mb;
+src/class.c:1441:                   mb->code_size = sizeof(miranda_bridge);
+src/class.c:1442:                   mb->code = miranda_bridge;
+src/class.c:1501:       enqueue_mtbl_idx = enqueue_mb->method_table_index;
+src/class.c:1916:            loadClass_mtbl_idx = mb->method_table_index;
+src/class.c:2114:        if(mb->state == MB_PREPARED) {
+src/class.c:2118:            gcPendingFree(mb->code);
+src/class.c:2121:        if(!(mb->access_flags & (ACC_NATIVE | ACC_ABSTRACT | ACC_MIRANDA)))
+src/class.c:2122:            gcPendingFree(mb->code);
+src/class.c:2126:        if(mb->access_flags & ACC_MIRANDA)
+src/class.c:2129:        if(!(mb->access_flags & ACC_NATIVE)) {
+src/class.c:2130:            gcPendingFree(mb->exception_table);
+src/class.c:2131:            gcPendingFree(mb->line_no_table);
+src/class.c:2133:        gcPendingFree(mb->throw_table);
+src/dll.c:142:    char *classname = CLASS_CB(mb->class)->name;
+src/dll.c:143:    char *methodname = mb->name;
+src/dll.c:155:    char *type = mb->type;
+src/dll.c:173:    ClassBlock *cb = CLASS_CB(mb->class);
+src/dll.c:176:    TRACE("<DLL: Looking up %s internally>\n", mb->name);
+src/dll.c:187:            ((strcmp(mb->name, methods[i].methodname) != 0) ||
+src/dll.c:189:               (strcmp(mb->type, methods[i].methodtype) != 0))); i++);
+src/dll.c:196:            return mb->native_invoker = methods[i].method;
+src/dll.c:207:        char *classname = slash2DotsDup(CLASS_CB(mb->class)->name);
+src/dll.c:209:                   classname, mb->name);
+src/dll.c:233:        signalException(java_lang_UnsatisfiedLinkError, mb->name);
+src/dll.c:599:          mb->name, mb->type);
+src/dll.c:607:                         (mb->access_flags & ACC_STATIC) ? class : NULL,
+src/dll.c:608:                         mb->simple_sig, mb->native_extra_arg, ostack,
+src/dll.c:609:                         mb->code, mb->args_count);
+src/dll.c:617:          mb->name, mb->type);
+src/dll.c:623:                        (mb->access_flags & ACC_STATIC) ? class : NULL,
+src/dll.c:624:                        mb->simple_sig, mb->native_extra_arg, ostack,
+src/dll.c:625:                        mb->code, mb->args_count);
+src/dll.c:644:    char *simple = convertSig2Simple(mb->type);
+src/dll.c:647:    if(mb->access_flags & ACC_STATIC)
+src/dll.c:654:            fprintf(sig_trace_fd, "%s%s\n", mb->access_flags & ACC_STATIC ?
+src/dll.c:655:                                            "static " : "", mb->type);
+src/dll.c:657:        if((mb->simple_sig = newUtf8(simple)) != simple)
+src/dll.c:660:        mb->native_extra_arg = nativeExtraArg(mb);
+src/dll.c:662:        if(mb->simple_sig[strlen(mb->simple_sig)-1] == 'L')
+src/dll.c:669:    mb->code = func;
+src/dll.c:670:    return mb->native_invoker = invoker;
+src/dll.c:675:    Object *loader = (CLASS_CB(mb->class))->class_loader;
+src/dll_ffi.c:48:    char *sig = mb->simple_sig;
+src/excep.c:182:    ExceptionTableEntry *table = mb->exception_table;
+src/excep.c:183:    int size = mb->exception_table_size;
+src/excep.c:184:    int pc = pc_pntr - ((CodePntr)mb->code);
+src/excep.c:195:                Class *caught_class = resolveClass(mb->class,
+src/excep.c:205:            return ((CodePntr)mb->code) + table[i].handler_pc;
+src/excep.c:219:        if(frame->mb->access_flags & ACC_SYNCHRONIZED) {
+src/excep.c:220:            Object *sync_ob = frame->mb->access_flags & ACC_STATIC ?
+src/excep.c:221:                    (Object*)frame->mb->class : (Object*)frame->lvars[0];
+src/excep.c:233:    int pc = pc_pntr - (CodePntr) mb->code;
+src/excep.c:236:    if(mb->line_no_table_size > 0) {
+src/excep.c:237:        for(i = mb->line_no_table_size-1; i &&
+src/excep.c:238:                    pc < mb->line_no_table[i].start_pc; i--);
+src/excep.c:240:        return mb->line_no_table[i].line_no;
+src/excep.c:247:    for(; last->mb != NULL && last->mb->name == SYMBOL(fillInStackTrace);
+src/excep.c:250:    for(; last->mb != NULL && last->mb->name == SYMBOL(object_init)
+src/excep.c:251:                           && isInstanceOf(throw_class, last->mb->class);
+src/excep.c:307:    ClassBlock *cb = CLASS_CB(mb->class);
+src/excep.c:308:    int is_native = mb->access_flags & ACC_NATIVE;
+src/excep.c:309:    char *dot_name = classlibExternalClassName(mb->class);
+src/excep.c:311:    Object *methodname = createString(mb->name);
+src/execute.c:110:    char *sig = mb->type;
+src/execute.c:123:    if(mb->access_flags & ACC_SYNCHRONIZED)
+src/execute.c:125:        objectLock(ob ? ob : mb->class);
+src/execute.c:127:    if(mb->access_flags & ACC_NATIVE){
+src/execute.c:129:        (*mb->native_invoker)(class, mb, ret);
+src/execute.c:134:    if(mb->access_flags & ACC_SYNCHRONIZED)
+src/execute.c:135:        objectUnlock(ob ? ob : mb->class);
+src/execute.c:143:    char *sig = mb->type;
+src/execute.c:158:    if(mb->access_flags & ACC_SYNCHRONIZED)
+src/execute.c:159:        objectLock(ob ? ob : mb->class);
+src/execute.c:161:    if(mb->access_flags & ACC_NATIVE)
+src/execute.c:162:        (*mb->native_invoker)(class, mb, ret);
+src/execute.c:166:    if(mb->access_flags & ACC_SYNCHRONIZED)
+src/execute.c:167:        objectUnlock(ob ? ob : mb->class);
+src/frame.c:46:    return last->mb->class;
+src/frame.c:63:        if(!(last->mb->access_flags & ACC_NATIVE))
+src/frame.c:72:            if(!(bottom->mb->access_flags & ACC_NATIVE))
+src/frame.c:73:                *data++ = bottom->mb->class;
+src/frame.c:86:                    Object *loader = CLASS_CB(last->mb->class)->class_loader;
+src/jam.c:307:    if(mb == NULL || !(mb->access_flags & ACC_STATIC)) {
+src/jni-stubs.c:19:    *ostack = (*(uintptr_t (*)(void*, void*))mb->code) (
+src/jni-stubs.c:31:    *(int64_t*)ostack = (*(int64_t (*)(void*, void*))mb->code) (
+src/jni-stubs.c:43:    *ostack = (uintptr_t)REF_TO_OBJ((*(uintptr_t (*)(void*, void*))mb->code) (
+src/jni-stubs.c:55:    (*(void (*)(void*, void*))mb->code) (
+src/jni-stubs.c:67:    *(double*)ostack = (*(double (*)(void*, void*, double))mb->code) (
+src/jni-stubs.c:80:    *(int64_t*)ostack = (*(int64_t (*)(void*, void*, double))mb->code) (
+src/jni-stubs.c:93:    *(double*)ostack = (*(double (*)(void*, void*, double, double))mb->code) (
+src/jni-stubs.c:107:    *ostack = (*(uintptr_t (*)(void*, void*, float))mb->code) (
+src/jni-stubs.c:120:    *ostack = (*(int8_t (*)(void*, void*, uintptr_t))mb->code) (
+src/jni-stubs.c:133:    *((float*)ostack + IS_BE64) = (*(float (*)(void*, void*, uintptr_t))mb->code) (
+src/jni-stubs.c:146:    *ostack = (*(uintptr_t (*)(void*, void*, uintptr_t))mb->code) (
+src/jni-stubs.c:159:    *ostack = (uintptr_t)REF_TO_OBJ((*(uintptr_t (*)(void*, void*, uintptr_t))mb->code) (
+src/jni-stubs.c:172:    *ostack = (*(uintptr_t (*)(void*, void*, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:186:    *ostack = (uintptr_t)REF_TO_OBJ((*(uintptr_t (*)(void*, void*, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:200:    *ostack = (*(uintptr_t (*)(void*, void*, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:215:    *ostack = (uintptr_t)REF_TO_OBJ((*(uintptr_t (*)(void*, void*, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:230:    *ostack = (*(uintptr_t (*)(void*, void*, uintptr_t, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:246:    *ostack = (uintptr_t)REF_TO_OBJ((*(uintptr_t (*)(void*, void*, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:263:    (*(void (*)(void*, void*, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:280:    (*(void (*)(void*, void*, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, int64_t, int64_t))mb->code) (
+src/jni-stubs.c:309:    *ostack = (*(uintptr_t (*)(void*, void*, uintptr_t, int64_t, uintptr_t))mb->code) (
+src/jni-stubs.c:324:    *(double*)ostack = (*(double (*)(void*, void*, int64_t))mb->code) (
+src/jni-stubs.c:337:    *ostack = (*(uintptr_t (*)(void*, void*, int64_t))mb->code) (
+src/jni-stubs.c:350:    *(int64_t*)ostack = (*(int64_t (*)(void*, void*, int64_t))mb->code) (
+src/jni-stubs.c:363:    *ostack = (uintptr_t)REF_TO_OBJ((*(uintptr_t (*)(void*, void*, int64_t))mb->code) (
+src/jni-stubs.c:376:    (*(void (*)(void*, void*, int64_t))mb->code) (
+src/jni-stubs.c:389:    *ostack = (*(uintptr_t (*)(void*, void*, int64_t, uintptr_t))mb->code) (
+src/jni-stubs.c:403:    *(int64_t*)ostack = (*(int64_t (*)(void*, void*, int64_t, uintptr_t))mb->code) (
+src/jni-stubs.c:417:    (*(void (*)(void*, void*, int64_t, uintptr_t))mb->code) (
+src/jni-stubs.c:431:    *(int64_t*)ostack = (*(int64_t (*)(void*, void*, int64_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:446:    (*(void (*)(void*, void*, int64_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:464:    (*(void (*)(void*, void*, int64_t, uintptr_t, int64_t, int64_t))mb->code) (
+src/jni-stubs.c:480:    *ostack = (*(int8_t (*)(void*, void*, int64_t, int64_t))mb->code) (
+src/jni-stubs.c:494:    *(int64_t*)ostack = (*(int64_t (*)(void*, void*, int64_t, int64_t))mb->code) (
+src/jni-stubs.c:508:    *ostack = (uintptr_t)REF_TO_OBJ((*(uintptr_t (*)(void*, void*, int64_t, int64_t))mb->code) (
+src/jni-stubs.c:522:    (*(void (*)(void*, void*, int64_t, int64_t))mb->code) (
+src/jni-stubs.c:536:    *ostack = (*(uintptr_t (*)(void*, void*, int64_t, int64_t, int64_t, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:554:    (*(void (*)(void*, void*, int64_t, int64_t, int64_t, int64_t))mb->code) (
+src/jni-stubs.c:570:    (*(void (*)(void*, void*, int64_t, int64_t, int64_t, int64_t, int64_t, int64_t))mb->code) (
+src/jni-stubs.c:588:    *ostack = (*(uintptr_t (*)(void*, void*, int64_t, int64_t, int64_t, int64_t, int64_t, int64_t, int64_t, int64_t, int64_t, int64_t, int64_t, int64_t))mb->code) (
+src/jni-stubs.c:614:    *ostack = (*(int8_t (*)(void*, void*))mb->code) (
+src/jni-stubs.c:626:    *ostack = (*(uintptr_t (*)(void*, void*))mb->code) (
+src/jni-stubs.c:638:    *(int64_t*)ostack = (*(int64_t (*)(void*, void*))mb->code) (
+src/jni-stubs.c:650:    *ostack = (uintptr_t)REF_TO_OBJ((*(uintptr_t (*)(void*, void*))mb->code) (
+src/jni-stubs.c:662:    (*(void (*)(void*, void*))mb->code) (
+src/jni-stubs.c:674:    (*(void (*)(void*, void*, float, float))mb->code) (
+src/jni-stubs.c:688:    *ostack = (*(int8_t (*)(void*, void*, uintptr_t))mb->code) (
+src/jni-stubs.c:701:    *ostack = (*(uintptr_t (*)(void*, void*, uintptr_t))mb->code) (
+src/jni-stubs.c:714:    *(int64_t*)ostack = (*(int64_t (*)(void*, void*, uintptr_t))mb->code) (
+src/jni-stubs.c:727:    *ostack = (uintptr_t)REF_TO_OBJ((*(uintptr_t (*)(void*, void*, uintptr_t))mb->code) (
+src/jni-stubs.c:740:    (*(void (*)(void*, void*, uintptr_t))mb->code) (
+src/jni-stubs.c:753:    *ostack = (*(int8_t (*)(void*, void*, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:767:    *ostack = (uintptr_t)REF_TO_OBJ((*(uintptr_t (*)(void*, void*, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:781:    (*(void (*)(void*, void*, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:795:    *ostack = (*(uintptr_t (*)(void*, void*, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:810:    (*(void (*)(void*, void*, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:825:    (*(void (*)(void*, void*, uintptr_t, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:841:    *ostack = (*(uintptr_t (*)(void*, void*, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:859:    *ostack = (uintptr_t)REF_TO_OBJ((*(uintptr_t (*)(void*, void*, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:877:    (*(void (*)(void*, void*, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:895:    (*(void (*)(void*, void*, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:915:    (*(void (*)(void*, void*, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:937:    (*(void (*)(void*, void*, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:962:    (*(void (*)(void*, void*, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:992:    *(int64_t*)ostack = (*(int64_t (*)(void*, void*, uintptr_t, int64_t))mb->code) (
+src/jni-stubs.c:1006:    *ostack = (uintptr_t)REF_TO_OBJ((*(uintptr_t (*)(void*, void*, uintptr_t, int64_t, int64_t))mb->code) (
+src/jni-stubs.c:1021:    *(int64_t*)ostack = (*(int64_t (*)(void*, void*, uintptr_t, int64_t, int64_t, uintptr_t))mb->code) (
+src/jni-stubs.c:1037:    *(int64_t*)ostack = (*(int64_t (*)(void*, void*, int64_t))mb->code) (
+src/jni-stubs.c:1050:    *ostack = (uintptr_t)REF_TO_OBJ((*(uintptr_t (*)(void*, void*, int64_t))mb->code) (
+src/jni-stubs.c:1063:    (*(void (*)(void*, void*, int64_t))mb->code) (
+src/jni-stubs.c:1076:    *ostack = (*(uintptr_t (*)(void*, void*, int64_t, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:1092:    (*(void (*)(void*, void*, int64_t, int64_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:1108:    (*(void (*)(void*, void*, int64_t, int64_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni-stubs.c:1126:    (*(void (*)(void*, void*, int64_t, int64_t, int64_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t))mb->code) (
+src/jni.c:83:        frame->next_ref = frame->lrefs + frame->mb->args_count;
+src/jni.c:106:    int size = (Object**)frame - frame->lrefs - frame->mb->args_count;
+src/jni.c:382:    if(mb->name == SYMBOL(object_init))
+src/jni.c:512:        loader = CLASS_CB(last->mb->class)->class_loader;
+src/jni.c:637:        if(mb == NULL || ((mb->access_flags & ACC_STATIC) != 0) != is_static)
+src/jni.c:837:        if(mb == NULL || !(mb->access_flags & ACC_NATIVE)) {
+src/reflect.c:157:    signature = sig = sysMalloc(strlen(mb->type) + 1);
+src/reflect.c:158:    strcpy(sig, mb->type);
+src/reflect.c:160:    classes = convertSig2ClassArray(&sig, mb->class);
+src/reflect.c:167:    char *ret = strchr(mb->type, ')') + 1;
+src/reflect.c:168:    return findClassFromSignature(ret, mb->class);
+src/reflect.c:176:    if((array = allocArray(class_array_class, mb->throw_table_size,
+src/reflect.c:182:    for(i = 0; i < mb->throw_table_size; i++)
+src/reflect.c:183:        if((excps[i] = resolveClass(mb->class, mb->throw_table[i],
+src/reflect.c:201:        if((mb->name == SYMBOL(object_init)) &&
+src/reflect.c:202:                      (!public || (mb->access_flags & ACC_PUBLIC)))
+src/reflect.c:214:        if((mb->name == SYMBOL(object_init)) &&
+src/reflect.c:215:                     (!public || (mb->access_flags & ACC_PUBLIC)))
+src/reflect.c:235:        if((mb->name[0] != '<') && (!public || (mb->access_flags & ACC_PUBLIC))
+src/reflect.c:236:                                && ((mb->access_flags & ACC_MIRANDA) == 0))
+src/reflect.c:248:        if((mb->name[0] != '<') && (!public || (mb->access_flags & ACC_PUBLIC))
+src/reflect.c:249:                                && ((mb->access_flags & ACC_MIRANDA) == 0))
+src/reflect.c:555:    CREATE_TOP_FRAME(ee, mb->class, mb, sp, ret);
+src/reflect.c:572:    if(mb->access_flags & ACC_SYNCHRONIZED)
+src/reflect.c:573:        objectLock(ob ? ob : mb->class);
+src/reflect.c:575:    if(mb->access_flags & ACC_NATIVE)
+src/reflect.c:576:        (*mb->native_invoker)(mb->class, mb, ret);
+src/reflect.c:580:    if(mb->access_flags & ACC_SYNCHRONIZED)
+src/reflect.c:581:        objectUnlock(ob ? ob : mb->class);
+src/reflect.c:609:    if(!checkClassAccess(mb->class, caller) ||
+src/reflect.c:624:    ClassBlock *cb = CLASS_CB(mb->class);
+src/reflect.c:642:    if(initClass(mb->class) == NULL)
+src/reflect.c:645:    if((ob = allocObject(mb->class)) != NULL)
+src/reflect.c:681:    if((mb->access_flags & ACC_STATIC) || IS_INTERFACE(CLASS_CB(mb->class)))
+src/reflect.c:682:        if(initClass(mb->class) == NULL)
+src/reflect.c:685:    if(mb->access_flags & ACC_STATIC)
+src/reflect.c:688:        if(!checkObject(ob, mb->class) ||
+src/resolve.c:39:       if(mb->name == methodname && mb->type == type)
+src/resolve.c:236:                if((mb->access_flags & ACC_ABSTRACT) &&
+src/resolve.c:422:    int mtbl_idx = mb->method_table_index;
+src/resolve.c:424:    if(mb->access_flags & ACC_PRIVATE)
+src/resolve.c:427:    if(CLASS_CB(mb->class)->access_flags & ACC_INTERFACE) {
+src/resolve.c:431:                   (mb->class != cb->imethod_table[i].interface); i++);
+src/resolve.c:443:    if(mb->access_flags & ACC_ABSTRACT) {
+src/resolve.c:444:        signalException(java_lang_AbstractMethodError, mb->name);
+src/thread.c:445:   mb->args_count = 0;
+src/thread.c:446:   mb->max_stack = 0;
+src/thread.c:864:                              last->mb->access_flags & ACC_NATIVE;
+src/thread.c:1118:                ClassBlock *cb = CLASS_CB(mb->class);
+src/thread.c:1124:                jam_printf("\tat %s.%s(", buffer, mb->name);
+src/thread.c:1126:                if(mb->access_flags & ACC_NATIVE)

@@ -1,0 +1,4 @@
+reflect.c:621:                             Object *param_types, int no_access_check,
+reflect.c:632:    if(!no_access_check && !checkInvokeAccess(mb, depth))
+reflect.c:668:                     int no_access_check, int depth) {
+reflect.c:675:    if(!no_access_check && !checkInvokeAccess(mb, depth))

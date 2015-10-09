@@ -1,0 +1,142 @@
+make  all-recursive
+make[1]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src' に入ります
+Making all in os
+make[2]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os' に入ります
+Making all in linux
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os/linux' に入ります
+Making all in x86_64
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os/linux/x86_64' に入ります
+make[4]: `all' に対して行うべき事はありません.
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os/linux/x86_64' から出ます
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os/linux' に入ります
+make[4]: `all-am' に対して行うべき事はありません.
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os/linux' から出ます
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os/linux' から出ます
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os' に入ります
+make[3]: `all-am' に対して行うべき事はありません.
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os' から出ます
+make[2]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/os' から出ます
+Making all in interp
+make[2]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/interp' に入ります
+Making all in engine
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/interp/engine' に入ります
+make[3]: `all' に対して行うべき事はありません.
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/interp/engine' から出ます
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/interp' に入ります
+make[3]: `all-am' に対して行うべき事はありません.
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/interp' から出ます
+make[2]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/interp' から出ます
+Making all in classlib
+make[2]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib' に入ります
+Making all in gnuclasspath
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath' に入ります
+Making all in lib
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib' に入ります
+Making all in jamvm
+make[5]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/jamvm' に入ります
+Making all in java
+make[6]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/jamvm/java' に入ります
+Making all in lang
+make[7]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/jamvm/java/lang' に入ります
+make[7]: `all' に対して行うべき事はありません.
+make[7]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/jamvm/java/lang' から出ます
+make[7]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/jamvm/java' に入ります
+make[7]: `all-am' に対して行うべき事はありません.
+make[7]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/jamvm/java' から出ます
+make[6]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/jamvm/java' から出ます
+make[6]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/jamvm' に入ります
+make[6]: `all-am' に対して行うべき事はありません.
+make[6]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/jamvm' から出ます
+make[5]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/jamvm' から出ます
+Making all in java
+make[5]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/java' に入ります
+Making all in lang
+make[6]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/java/lang' に入ります
+Making all in reflect
+make[7]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/java/lang/reflect' に入ります
+make[7]: `all' に対して行うべき事はありません.
+make[7]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/java/lang/reflect' から出ます
+make[7]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/java/lang' に入ります
+make[7]: `all-am' に対して行うべき事はありません.
+make[7]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/java/lang' から出ます
+make[6]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/java/lang' から出ます
+Making all in security
+make[6]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/java/security' に入ります
+make[6]: `all' に対して行うべき事はありません.
+make[6]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/java/security' から出ます
+make[6]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/java' に入ります
+make[6]: `all-am' に対して行うべき事はありません.
+make[6]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/java' から出ます
+make[5]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/java' から出ます
+Making all in gnu
+make[5]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/gnu' に入ります
+Making all in classpath
+make[6]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/gnu/classpath' に入ります
+make[6]: `all' に対して行うべき事はありません.
+make[6]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/gnu/classpath' から出ます
+make[6]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/gnu' に入ります
+make[6]: `all-am' に対して行うべき事はありません.
+make[6]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/gnu' から出ます
+make[5]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/gnu' から出ます
+Making all in sun
+make[5]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/sun' に入ります
+Making all in reflect
+make[6]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/sun/reflect' に入ります
+Making all in annotation
+make[7]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/sun/reflect/annotation' に入ります
+make[7]: `all' に対して行うべき事はありません.
+make[7]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/sun/reflect/annotation' から出ます
+make[7]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/sun/reflect' に入ります
+make[7]: `all-am' に対して行うべき事はありません.
+make[7]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/sun/reflect' から出ます
+make[6]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/sun/reflect' から出ます
+make[6]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/sun' に入ります
+make[6]: `all-am' に対して行うべき事はありません.
+make[6]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/sun' から出ます
+make[5]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib/sun' から出ます
+make[5]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib' に入ります
+make[5]: `all-am' に対して行うべき事はありません.
+make[5]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib' から出ます
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/lib' から出ます
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath' に入ります
+make[4]: `all-am' に対して行うべき事はありません.
+make[4]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath' から出ます
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath' から出ます
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib' に入ります
+make[3]: `all-am' に対して行うべき事はありません.
+make[3]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib' から出ます
+make[2]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src/classlib' から出ます
+make[2]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src' に入ります
+/bin/bash ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I../src/interp/engine   -g -O2 -MT init.lo -MD -MP -MF .deps/init.Tpo -c -o init.lo init.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../src/interp/engine -g -O2 -MT init.lo -MD -MP -MF .deps/init.Tpo -c init.c  -fPIC -DPIC -o .libs/init.o
+mv -f .deps/init.Tpo .deps/init.Plo
+/bin/bash ../libtool --tag=CC   --mode=link gcc  -g -O2   -o libcore.la  alloc.lo cast.lo class.lo dll.lo excep.lo execute.lo hash.lo jni.lo lock.lo natives.lo reflect.lo resolve.lo string.lo thread.lo utf8.lo zip.lo properties.lo dll_ffi.lo access.lo frame.lo init.lo hooks.lo symbol.lo shutdown.lo time.lo sig.lo stubs.lo jni-stubs.lo parson.lo interp/libinterp.la os/linux/x86_64/libnative.la os/linux/libos.la classlib/gnuclasspath/libclasslib.la -lz -ldl -lm -lrt -lpthread 
+libtool: link: rm -fr  .libs/libcore.a .libs/libcore.la
+libtool: link: (cd .libs/libcore.lax/libinterp.a && ar x "/home/akehata/Pjamvm-2.0.0/src/interp/.libs/libinterp.a")
+libtool: link: (cd .libs/libcore.lax/libnative.a && ar x "/home/akehata/Pjamvm-2.0.0/src/os/linux/x86_64/.libs/libnative.a")
+libtool: link: (cd .libs/libcore.lax/libos.a && ar x "/home/akehata/Pjamvm-2.0.0/src/os/linux/.libs/libos.a")
+libtool: link: (cd .libs/libcore.lax/libclasslib.a && ar x "/home/akehata/Pjamvm-2.0.0/src/classlib/gnuclasspath/.libs/libclasslib.a")
+copying selected object files to avoid basename conflicts...
+libtool: link: ln .libs/libcore.lax/libnative.a/init.o .libs/libcore.lax/lt1-init.o || cp .libs/libcore.lax/libnative.a/init.o .libs/libcore.lax/lt1-init.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/alloc.o .libs/libcore.lax/lt2-alloc.o || cp .libs/libcore.lax/libclasslib.a/alloc.o .libs/libcore.lax/lt2-alloc.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/class.o .libs/libcore.lax/lt3-class.o || cp .libs/libcore.lax/libclasslib.a/class.o .libs/libcore.lax/lt3-class.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/dll.o .libs/libcore.lax/lt4-dll.o || cp .libs/libcore.lax/libclasslib.a/dll.o .libs/libcore.lax/lt4-dll.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/excep.o .libs/libcore.lax/lt5-excep.o || cp .libs/libcore.lax/libclasslib.a/excep.o .libs/libcore.lax/lt5-excep.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/frame.o .libs/libcore.lax/lt6-frame.o || cp .libs/libcore.lax/libclasslib.a/frame.o .libs/libcore.lax/lt6-frame.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/jni.o .libs/libcore.lax/lt7-jni.o || cp .libs/libcore.lax/libclasslib.a/jni.o .libs/libcore.lax/lt7-jni.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/natives.o .libs/libcore.lax/lt8-natives.o || cp .libs/libcore.lax/libclasslib.a/natives.o .libs/libcore.lax/lt8-natives.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/properties.o .libs/libcore.lax/lt9-properties.o || cp .libs/libcore.lax/libclasslib.a/properties.o .libs/libcore.lax/lt9-properties.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/reflect.o .libs/libcore.lax/lt10-reflect.o || cp .libs/libcore.lax/libclasslib.a/reflect.o .libs/libcore.lax/lt10-reflect.o
+libtool: link: ln .libs/libcore.lax/libclasslib.a/thread.o .libs/libcore.lax/lt11-thread.o || cp .libs/libcore.lax/libclasslib.a/thread.o .libs/libcore.lax/lt11-thread.o
+libtool: link: ar cru .libs/libcore.a .libs/alloc.o .libs/cast.o .libs/class.o .libs/dll.o .libs/excep.o .libs/execute.o .libs/hash.o .libs/jni.o .libs/lock.o .libs/natives.o .libs/reflect.o .libs/resolve.o .libs/string.o .libs/thread.o .libs/utf8.o .libs/zip.o .libs/properties.o .libs/dll_ffi.o .libs/access.o .libs/frame.o .libs/init.o .libs/hooks.o .libs/symbol.o .libs/shutdown.o .libs/time.o .libs/sig.o .libs/stubs.o .libs/jni-stubs.o .libs/parson.o .libs/libcore.lax/libinterp.a/direct.o .libs/libcore.lax/libinterp.a/inlining.o .libs/libcore.lax/libinterp.a/interp.o .libs/libcore.lax/libinterp.a/interp2.o .libs/libcore.lax/libinterp.a/relocatability.o .libs/libcore.lax/libnative.a/callNative.o .libs/libcore.lax/libnative.a/dll_md.o .libs/libcore.lax/lt1-init.o .libs/libcore.lax/libos.a/os.o .libs/libcore.lax/lt2-alloc.o .libs/libcore.lax/libclasslib.a/annotations.o .libs/libcore.lax/lt3-class.o .libs/libcore.lax/lt4-dll.o .libs/libcore.lax/lt5-excep.o .libs/libcore.lax/lt6-frame.o .libs/libcore.lax/lt7-jni.o .libs/libcore.lax/lt8-natives.o .libs/libcore.lax/lt9-properties.o .libs/libcore.lax/lt10-reflect.o .libs/libcore.lax/lt11-thread.o
+libtool: link: ranlib .libs/libcore.a
+libtool: link: rm -fr .libs/libcore.lax .libs/libcore.lax
+libtool: link: ( cd ".libs" && rm -f "libcore.la" && ln -s "../libcore.la" "libcore.la" )
+/bin/bash ../libtool --tag=CC   --mode=link gcc  -g -O2 -avoid-version  -o libjvm.la -rpath /usr/local/jamvm/lib  libcore.la -lz -ldl -lm -lrt -lpthread 
+libtool: link: rm -fr  .libs/libjvm.la .libs/libjvm.lai .libs/libjvm.so
+libtool: link: gcc -shared  -fPIC -DPIC  -Wl,--whole-archive ./.libs/libcore.a -Wl,--no-whole-archive  -lz -ldl -lm -lrt -lpthread  -O2   -Wl,-soname -Wl,libjvm.so -o .libs/libjvm.so
+libtool: link: ( cd ".libs" && rm -f "libjvm.la" && ln -s "../libjvm.la" "libjvm.la" )
+/bin/bash ../libtool --tag=CC   --mode=link gcc  -g -O2   -o jamvm jam.o libcore.la -lz -ldl -lm -lrt -lpthread 
+libtool: link: gcc -g -O2 -o jamvm jam.o  ./.libs/libcore.a -lz -ldl -lm -lrt -lpthread
+make[2]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src' から出ます
+make[1]: ディレクトリ `/home/akehata/Pjamvm-2.0.0/src' から出ます

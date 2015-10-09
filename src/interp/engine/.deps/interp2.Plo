@@ -1,0 +1,5 @@
+interp2.lo: interp2.c /usr/include/stdc-predef.h ../../../src/config.h
+
+/usr/include/stdc-predef.h:
+
+../../../src/config.h:

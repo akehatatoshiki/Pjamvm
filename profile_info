@@ -1,0 +1,145 @@
+src/classlib/gnuclasspath/alloc.c:18: * Foundation, 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+src/classlib/gnuclasspath/alloc.c:32:    if(IS_VMTHROWABLE(CLASS_CB(ob->class))) {
+src/classlib/gnuclasspath/alloc.c:39:    if(IS_VMTHREAD(CLASS_CB(ob->class))) {
+src/classlib/gnuclasspath/annotations.c:19: * Foundation, 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+src/classlib/gnuclasspath/annotations.c:94:    ConstantPool *cp = &cb->constant_pool;
+src/classlib/gnuclasspath/annotations.c:210:    ConstantPool *cp = &cb->constant_pool;
+src/classlib/gnuclasspath/annotations.c:263:        u1 *data_ptr = annotations->data;
+src/classlib/gnuclasspath/annotations.c:264:        int data_len = annotations->len;
+src/classlib/gnuclasspath/annotations.c:291:    return parseAnnotations(fb->class, getFieldAnnotationData(fb));
+src/classlib/gnuclasspath/annotations.c:295:    return parseAnnotations(mb->class, getMethodAnnotationData(mb));
+src/classlib/gnuclasspath/annotations.c:311:        no_params = numElementsInSig(mb->type);
+src/classlib/gnuclasspath/annotations.c:317:        data_ptr = annotations->data;
+src/classlib/gnuclasspath/annotations.c:318:        data_len = annotations->len;
+src/classlib/gnuclasspath/annotations.c:341:            if((inner_array_data[j] = parseAnnotation(mb->class, &data_ptr,
+src/classlib/gnuclasspath/annotations.c:360:        u1 *data = annotations->data;
+src/classlib/gnuclasspath/annotations.c:361:        int len = annotations->len;
+src/classlib/gnuclasspath/annotations.c:363:        return parseElementValue(mb->class, &data, &len);
+src/classlib/gnuclasspath/class.c:18: * Foundation, 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+src/classlib/gnuclasspath/class.c:35:/*	XXX	NVM VARIABLES - CLASS.C	*/
+src/classlib/gnuclasspath/class.c:55:    ldr_vmdata_offset = ldr_fb->u.offset;
+src/classlib/gnuclasspath/class.c:68:    Object *vmdata = allocObject(ldr_new_unloader->class);
+src/classlib/gnuclasspath/class.c:83:    Object *name = createString(package_entry->name);
+src/classlib/gnuclasspath/class.c:87:                                            vm_loader_create_package->class,
+src/classlib/gnuclasspath/class.c:89:                                            package_entry->index);
+src/classlib/gnuclasspath/class.c:126:    char *vm_path = args->bootpath_v != NULL ? args->bootpath_v
+src/classlib/gnuclasspath/class.c:128:    char *cp_path = args->bootpath_c != NULL ? args->bootpath_c
+src/classlib/gnuclasspath/class.c:177:    ldr_data_tbl_offset = hashtable->u.offset;
+src/classlib/gnuclasspath/dll.c:18: * Foundation, 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+src/classlib/gnuclasspath/excep.c:18: * Foundation, 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+src/classlib/gnuclasspath/excep.c:41:    CLASS_CB(vmthrow_class)->flags |= VMTHROWABLE;
+src/classlib/gnuclasspath/excep.c:42:    backtrace_offset = backtrace->u.offset;
+src/classlib/gnuclasspath/excep.c:80:            markObject(mb->class, mark);
+src/classlib/gnuclasspath/frame.c:18: * Foundation, 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+src/classlib/gnuclasspath/frame.c:27:   security related stack-walking.  It guards against invocation
+src/classlib/gnuclasspath/frame.c:35:        for(; last->mb != NULL; last = last->prev)
+src/classlib/gnuclasspath/frame.c:36:            if(depth-- <= 0)
+src/classlib/gnuclasspath/frame.c:41:        if((last = last->prev)->prev == NULL)
+src/classlib/gnuclasspath/frame.c:45:        if(last->mb->class == getReflectMethodClass()) {
+src/classlib/gnuclasspath/frame.c:47:            last = last->prev->prev;
+src/classlib/gnuclasspath/jni.c:18: * Foundation, 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+src/classlib/gnuclasspath/jni.c:62:    buffCap_offset = buffCap_fb->u.offset;
+src/classlib/gnuclasspath/jni.c:63:    buffAddr_offset = buffAddr_fb->u.offset;
+src/classlib/gnuclasspath/jni.c:64:    rawdata_offset = rawdata_fb->u.offset;
+src/classlib/gnuclasspath/jni.c:102:    return -1;
+src/classlib/gnuclasspath/jni.c:106:    if(CLASS_CB(last->mb->class)->name == SYMBOL(java_lang_VMRuntime))
+src/classlib/gnuclasspath/jni.c:107:        return (Object*)last->lvars[1];
+src/classlib/gnuclasspath/natives.c:19: * Foundation, 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+src/classlib/gnuclasspath/natives.c:55:    pd_offset = pd->u.offset;
+src/classlib/gnuclasspath/natives.c:63:    *ostack++ = (uintptr_t)ob->class;
+src/classlib/gnuclasspath/natives.c:202:    *ostack++ = ob == NULL ? FALSE : (uintptr_t)isInstanceOf(clazz, ob->class);
+src/classlib/gnuclasspath/natives.c:280:    Object *string = cb->signature == NULL ? NULL : createString(cb->signature);
+src/classlib/gnuclasspath/natives.c:289:                             IS_INTERFACE(cb) ? NULL : cb->super);
+src/classlib/gnuclasspath/natives.c:299:        switch(cb->name[1]) {
+src/classlib/gnuclasspath/natives.c:301:                componentType = findArrayClassFromClass(&cb->name[1], class);
+src/classlib/gnuclasspath/natives.c:305:                componentType = cb->element_class;
+src/classlib/gnuclasspath/natives.c:314:    char *dot_name = slash2DotsDup(CLASS_CB((Class*)ostack[0])->name);
+src/classlib/gnuclasspath/natives.c:379:    *ostack++ = (uintptr_t)CLASS_CB(clazz)->class_loader;
+src/classlib/gnuclasspath/natives.c:388:    if(!ignore_inner_attrs && cb->declaring_class)
+src/classlib/gnuclasspath/natives.c:389:        *ostack++ = (uintptr_t)cb->inner_access_flags;
+src/classlib/gnuclasspath/natives.c:391:        *ostack++ = (uintptr_t)cb->access_flags;
+src/classlib/gnuclasspath/natives.c:424:                if(len-i != 1)
+src/classlib/gnuclasspath/natives.c:428:                if(cstr[i+1] == '[' || cstr[len-1] != ';')
+src/classlib/gnuclasspath/natives.c:512:    *ostack++ = (uintptr_t) (class ? CLASS_CB(class)->class_loader : NULL);
+src/classlib/gnuclasspath/natives.c:667:    *ostack++ = (uintptr_t) mb->access_flags;
+src/classlib/gnuclasspath/natives.c:713:    *ostack++ = (uintptr_t) mb->access_flags;
+src/classlib/gnuclasspath/natives.c:719:    *ostack++ = (uintptr_t) createString(mb->name);
+src/classlib/gnuclasspath/natives.c:725:    Object *string = mb->signature == NULL ? NULL : createString(mb->signature);
+src/classlib/gnuclasspath/natives.c:735:    Object *string = mb->signature == NULL ? NULL : createString(mb->signature);
+src/classlib/gnuclasspath/natives.c:783:    *ostack++ = (uintptr_t) fb->access_flags;
+src/classlib/gnuclasspath/natives.c:789:    *ostack++ = (uintptr_t) createString(fb->name);
+src/classlib/gnuclasspath/natives.c:801:    Object *string = fb->signature == NULL ? NULL : createString(fb->signature);
+src/classlib/gnuclasspath/natives.c:824:        if(!checkClassAccess(fb->class, caller) ||
+src/classlib/gnuclasspath/natives.c:833:    if(fb->access_flags & ACC_STATIC) {
+src/classlib/gnuclasspath/natives.c:837:        if(initClass(fb->class) == NULL)
+src/classlib/gnuclasspath/natives.c:840:        return fb->u.static_value.data;
+src/classlib/gnuclasspath/natives.c:843:    if(!checkObject(ob, fb->class))
+src/classlib/gnuclasspath/natives.c:846:    return &INST_DATA(ob, int, fb->u.offset);
+src/classlib/gnuclasspath/natives.c:987:/* static method - intern(Ljava/lang/String;)Ljava/lang/String; */
+src/classlib/gnuclasspath/natives.c:998:    *ostack++ = (uintptr_t)getExecEnv()->thread;
+src/classlib/gnuclasspath/natives.c:1098:    frame = getExecEnv()->last_frame;
+src/classlib/gnuclasspath/natives.c:1102:        for(; frame->mb != NULL; frame = frame->prev, depth++);
+src/classlib/gnuclasspath/natives.c:1103:    } while((frame = frame->prev)->prev != NULL);
+src/classlib/gnuclasspath/natives.c:1114:        frame = getExecEnv()->last_frame;
+src/classlib/gnuclasspath/natives.c:1117:            for(; frame->mb != NULL; frame = frame->prev) {
+src/classlib/gnuclasspath/natives.c:1118:                *dcl++ = frame->mb->class;
+src/classlib/gnuclasspath/natives.c:1119:                *dnm++ = createString(frame->mb->name);
+src/classlib/gnuclasspath/natives.c:1121:        } while((frame = frame->prev)->prev != NULL);
+src/classlib/gnuclasspath/natives.c:1195:                Monitor *mon = thread->blocked_mon;
+src/classlib/gnuclasspath/natives.c:1196:                Object *lock = mon != NULL ? mon->obj : NULL;
+src/classlib/gnuclasspath/natives.c:1200:                                       owner->ee->thread : NULL;
+src/classlib/gnuclasspath/natives.c:1202:                                       javaThreadId(owner) : -1;
+src/classlib/gnuclasspath/natives.c:1211:                                          helper, thread->ee->thread, lock,
+src/classlib/gnuclasspath/natives.c:1219:                                      thread->blocked_count, 0LL,
+src/classlib/gnuclasspath/natives.c:1221:                                      helper_info[3], thread->waited_count,
+src/classlib/gnuclasspath/properties.c:18: * Foundation, 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+src/classlib/gnuclasspath/reflect.c:19: * Foundation, 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+src/classlib/gnuclasspath/reflect.c:108:    vm_cons_slot_offset = vm_cons_slot_fb->u.offset; 
+src/classlib/gnuclasspath/reflect.c:109:    vm_cons_class_offset = vm_cons_class_fb->u.offset; 
+src/classlib/gnuclasspath/reflect.c:110:    vm_cons_param_offset = vm_cons_param_fb->u.offset; 
+src/classlib/gnuclasspath/reflect.c:111:    vm_cons_cons_offset = vm_cons_cons_fb->u.offset; 
+src/classlib/gnuclasspath/reflect.c:112:    vm_mthd_slot_offset = vm_mthd_slot_fb->u.offset; 
+src/classlib/gnuclasspath/reflect.c:113:    vm_mthd_class_offset = vm_mthd_class_fb->u.offset; 
+src/classlib/gnuclasspath/reflect.c:114:    vm_mthd_ret_offset = vm_mthd_ret_fb->u.offset; 
+src/classlib/gnuclasspath/reflect.c:115:    vm_mthd_param_offset = vm_mthd_param_fb->u.offset; 
+src/classlib/gnuclasspath/reflect.c:116:    vm_mthd_m_offset = vm_mthd_m_fb->u.offset; 
+src/classlib/gnuclasspath/reflect.c:117:    vm_fld_slot_offset = vm_fld_slot_fb->u.offset; 
+src/classlib/gnuclasspath/reflect.c:118:    vm_fld_class_offset = vm_fld_class_fb->u.offset; 
+src/classlib/gnuclasspath/reflect.c:119:    vm_fld_type_offset = vm_fld_type_fb->u.offset; 
+src/classlib/gnuclasspath/reflect.c:120:    vm_fld_f_offset = vm_fld_f_fb->u.offset; 
+src/classlib/gnuclasspath/reflect.c:121:    cons_cons_offset = cons_cons_fb->u.offset; 
+src/classlib/gnuclasspath/reflect.c:122:    mthd_m_offset = mthd_m_fb->u.offset; 
+src/classlib/gnuclasspath/reflect.c:123:    fld_f_offset = fld_f_fb->u.offset; 
+src/classlib/gnuclasspath/reflect.c:124:    acc_flag_offset = acc_flag_fb->u.offset;
+src/classlib/gnuclasspath/reflect.c:145:    INST_DATA(vm_reflect_ob, Class*, vm_cons_class_offset) = mb->class;
+src/classlib/gnuclasspath/reflect.c:147:                                     mb - CLASS_CB(mb->class)->methods;
+src/classlib/gnuclasspath/reflect.c:149:    /* Link the Java-level and VM-level objects together */
+src/classlib/gnuclasspath/reflect.c:165:    INST_DATA(vm_reflect_ob, Class*, vm_mthd_class_offset) = mb->class;
+src/classlib/gnuclasspath/reflect.c:167:                                     mb - CLASS_CB(mb->class)->methods;
+src/classlib/gnuclasspath/reflect.c:169:    /* Link the Java-level and VM-level objects together */
+src/classlib/gnuclasspath/reflect.c:185:    INST_DATA(vm_reflect_ob, Class*, vm_fld_class_offset) = fb->class;
+src/classlib/gnuclasspath/reflect.c:187:                                     fb - CLASS_CB(fb->class)->fields;
+src/classlib/gnuclasspath/reflect.c:189:    /* Link the Java-level and VM-level objects together */
+src/classlib/gnuclasspath/reflect.c:196:/* Functions to get values from the VM-level reflection objects */
+src/classlib/gnuclasspath/reflect.c:202:    return &CLASS_CB(decl_class)->methods[slot];
+src/classlib/gnuclasspath/reflect.c:219:    return &CLASS_CB(decl_class)->methods[slot];
+src/classlib/gnuclasspath/reflect.c:226:    return &(CLASS_CB(decl_class)->fields[slot]);
+src/classlib/gnuclasspath/reflect.c:289:    if(reflect_ob->class == cons_reflect_class) {
+src/classlib/gnuclasspath/reflect.c:307:    int encl_class_idx = cb->enclosing_class;
+src/classlib/gnuclasspath/reflect.c:312:        encl_class_idx = cb->declaring_class;
+src/classlib/gnuclasspath/reflect.c:323:    if(cb->enclosing_class && cb->enclosing_method) {
+src/classlib/gnuclasspath/reflect.c:324:        Class *enclosing_class = resolveClass(class, cb->enclosing_class,
+src/classlib/gnuclasspath/reflect.c:328:            ConstantPool *cp = &cb->constant_pool;
+src/classlib/gnuclasspath/reflect.c:330:                                               cb->enclosing_method));
+src/classlib/gnuclasspath/reflect.c:332:                                               cb->enclosing_method));
+src/classlib/gnuclasspath/reflect.c:353:    if(mb != NULL && mb->name != SYMBOL(object_init))
+src/classlib/gnuclasspath/reflect.c:362:    if(mb != NULL && mb->name == SYMBOL(object_init))
+src/classlib/gnuclasspath/thread.c:18: * Foundation, 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+src/classlib/gnuclasspath/thread.c:52:    /* Call the initialiser method -- this is for use by threads
+src/classlib/gnuclasspath/thread.c:82:    /* set VMThread ref in Thread object to null - operations after this
+src/classlib/gnuclasspath/thread.c:97:    CLASS_CB(vmthread_class)->flags |= VMTHREAD;
+src/classlib/gnuclasspath/thread.c:120:    vmthread_offset = vmThread->u.offset;
+src/classlib/gnuclasspath/thread.c:121:    thread_offset = thread->u.offset;
+src/classlib/gnuclasspath/thread.c:122:    vmData_offset = vmData->u.offset;
+src/classlib/gnuclasspath/thread.c:124:    return root->u.static_value.p;
+src/classlib/gnuclasspath/thread.c:154:        /* If it was an interrupt (e.g. Ctrl-C) terminate the VM */

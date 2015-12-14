@@ -803,6 +803,12 @@ typedef struct opc {
 	Object **has_finaliser_list;
 	int has_finaliser_count;
 	int has_finaliser_size;
+  /* To handle persistence data */
+  char *pot;
+  char *commit_log;
+  /* flags */
+  int flags_commiting;
+  int flags_nomalend;
 } OPC;
 
 #define CLASS_CB(classRef)           ((ClassBlock*)(classRef+1))
@@ -1022,6 +1028,7 @@ extern Class *defineClass(char *classname, char *data, int offset, int len,
 extern void linkClass(Class *class);
 extern Class *initClass(Class *class);
 extern int reinitClass(char *name);
+extern void  reinitialiseSystemClass();
 extern Class *findSystemClass(char *name);
 extern Class *findSystemClass0(char *name);
 extern Class *loadSystemClass(char *name);

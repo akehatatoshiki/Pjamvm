@@ -53,7 +53,7 @@ class.lo: class.c /usr/include/stdc-predef.h /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/setjmp.h /usr/include/setjmp.h \
  /usr/include/x86_64-linux-gnu/bits/setjmp2.h lock.h natives.h hash.h \
  zip.h class.h ../src/interp/engine/interp.h properties.h \
- ../src/interp/engine/interp-direct.h \
+ ../src/interp/engine/interp-inlining.h \
  ../src/interp/engine/interp-threading.h \
  ../src/interp/engine/interp-direct-common.h symbol.h classlib-symbol.h \
  excep.h classlib-excep.h classlib.h
@@ -232,7 +232,7 @@ class.h:
 
 properties.h:
 
-../src/interp/engine/interp-direct.h:
+../src/interp/engine/interp-inlining.h:
 
 ../src/interp/engine/interp-threading.h:
 

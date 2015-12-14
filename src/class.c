@@ -1998,6 +1998,16 @@ int reinitialiseNativeMethods(){
   return TRUE;
 }
 
+#define ITERATE(ptr) reinitClass(CLASS_CB(ptr)->name)
+
+void reinitialiseSystemClass(){
+  int i;
+
+  hashIterate(boot_classes);
+  hashIterate(boot_packages);
+
+}
+
 
 Object *getSystemClassLoader() {
     Class *class_loader;
@@ -2026,9 +2036,9 @@ Object *getSystemClassLoader() {
     return NULL;
 }
 
-int recoveryClass(Object *root,Object *system_loader){
 
-    if(system_loader == NULL) return FALSE;
+int recoveryClass(Object *root){
+
     Class *old_class = root->class;
     ClassBlock *old_cb = CLASS_CB(old_class);
     char *classname = old_cb->name;
@@ -2067,6 +2077,7 @@ Object *bootPackage(char *package_name) {
     return NULL;
 }
 
+#undef ITERATE
 #define ITERATE(ptr)                                          \
     if((data[--count] = classlibBootPackages(ptr)) == NULL) { \
         array = NULL;                                         \

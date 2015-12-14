@@ -59,7 +59,7 @@ direct.lo: direct.c /usr/include/stdc-predef.h ../../src/jam.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib.h \
  ../../src/interp/engine/interp.h ../../src/properties.h \
- ../../src/interp/engine/interp-direct.h \
+ ../../src/interp/engine/interp-inlining.h \
  ../../src/interp/engine/interp-threading.h \
  ../../src/interp/engine/interp-direct-common.h ../../src/symbol.h \
  ../../src/classlib-symbol.h inlining.h shared.h ../../src/hash.h \
@@ -227,7 +227,7 @@ direct.lo: direct.c /usr/include/stdc-predef.h ../../src/jam.h \
 
 ../../src/properties.h:
 
-../../src/interp/engine/interp-direct.h:
+../../src/interp/engine/interp-inlining.h:
 
 ../../src/interp/engine/interp-threading.h:
 

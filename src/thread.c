@@ -1403,7 +1403,7 @@ int initialiseThreadStage2(InitArgs *args) {
     threadId_offset = threadId->u.offset;
     run_mtbl_idx = run->method_table_index;
 
-    if(testing_mode) jam_printf("try to find java_lang_ThreadGroup\n");
+    //if(testing_mode) jam_printf("try to find java_lang_ThreadGroup\n");
     thrdGrp_class = findSystemClass(SYMBOL(java_lang_ThreadGroup));
 
     if(exceptionOccurred())

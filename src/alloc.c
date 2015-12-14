@@ -127,6 +127,12 @@ typedef struct phash{
   void *val;
 } PHash;
 
+typedef struct logs{
+  void *handle;
+  void *value;
+} Logs;
+
+
 static PHash *hash;
 static const char *hashpath = "PersistenceHash";
 static int hashsize = 0;
@@ -392,7 +398,7 @@ int initHash(int fd){
 
 int initialiseNVM(){
   struct stat st;
-  char *nvmpath = "NVMHeap";
+  char *nvmpath = "SystemHeap";
   unsigned long volatile * const NVMAddr = (unsigned long *) NVM_ADDRESS;
   int IS_NVMIMAGE_EXIST = FALSE;
   nvmCurrentSize = alignSize(nvmCurrentSize);
@@ -465,8 +471,19 @@ int initialiseAlloc(InitArgs *args) {
     if(stat(imgpath,&st) == 0) IS_IMAGE_EXIST = TRUE;
     if(stat(hashpath,&st) == 0) IS_HASH_EXIST = TRUE;
     if(testing_mode) jam_printf("Image file is %d, Hash is %d.(0:F,1:T)\n",IS_IMAGE_EXIST,IS_HASH_EXIST);
+
+
+    if(initialiseNVM() == FALSE) return FALSE;
+    if(msync(mem, heapsize, MS_SYNC) == -1){
+      perror("msync");
+      return FALSE;
+    }
+    ph_value = (OPC*)(nvm-sizeof(OPC));
+
+
     if(IS_HASH_EXIST){
       first_ex = FALSE;
+      //hash = ph_value->pot;
       hashsize = alignSize(sizeof(PHash)*HASH_SIZE);
       if((fd_hash = open(hashpath,O_RDWR|O_APPEND,S_IRUSR|S_IWUSR)) == -1){
           perror("Couldn't create memory image files. Check your image path.");
@@ -486,8 +503,9 @@ int initialiseAlloc(InitArgs *args) {
       if(initHash(fd_hash) == -1) return FALSE;
     }
     if (testing_mode){
-      jam_printf("Created PersistenceHash an %p with size %d\n", hash, hashsize);
+      jam_printf("Created PersistenceHash an %p with size %d\n", hash, sizeof(PHash)*HASH_SIZE);
     }
+
     heapsize = alignSize(args->max_heap);
     if(IS_IMAGE_EXIST == TRUE){
       first_ex = FALSE;
@@ -504,21 +522,17 @@ int initialiseAlloc(InitArgs *args) {
     }
     mem   = (char*)mmap(heapMemAddr,heapsize,PROT_READ|PROT_WRITE,
 			                      MAP_SHARED,fd_img,0);
+
     if(mem == MAP_FAILED){
       printf("%d\n",errno);
       perror("mmap:When init heap");
       return FALSE;
     }
+
     if (testing_mode){
   		jam_printf("Created Heap Memory an %p with size %d\n", mem, heapsize);
   	}
-    //printf("initNVM...\n");
-  	if(initialiseNVM() == FALSE) return FALSE;
-    if(msync(mem, heapsize, MS_SYNC) == -1){
-      perror("msync");
-      return FALSE;
-    }
-    //printf("pinitdone\n");
+
   }else{
     mem = (char*)mmap(0, args->max_heap, PROT_READ|PROT_WRITE,
                                                MAP_PRIVATE|MAP_ANON, -1, 0);
@@ -543,8 +557,18 @@ int initialiseAlloc(InitArgs *args) {
     //printf("%d\n",file);
 	  /*	XXX NVM CHANGE 009.000.003	*/
 	  if(IS_IMAGE_EXIST == TRUE){
-      ph_value = (OPC*)(nvm-sizeof(OPC));
-      //printf("ph_value. %p\n",ph_value);
+      /* going to Recovery */
+      if(!ph_value->flags_nomalend){
+        if(recoveryObjectClass() == FALSE){
+          jam_printf("Cannot recovery Object. Memoryimage is broken.\n");
+          return FALSE;
+        }
+      }
+      /* going to Recommit */
+      if(ph_value->flags_commiting){
+        reCommit((Logs*)ph_value->commit_log);
+        ph_value->flags_commiting = FALSE;
+      }
       *chunkpp = ph_value->chunkpp;
       //printf("chunkpp ok \n");
       freelist->header = (uintptr_t)ph_value->freelist_header;
@@ -560,6 +584,9 @@ int initialiseAlloc(InitArgs *args) {
       freelist->header = heapfree = heaplimit-heapbase;
       freelist->next = 0;
     }
+
+    if(is_persistent) ph_value->flags_nomalend = FALSE;
+
     //if(testing_mode) jam_printf("freelist initialised\n");
     TRACE_GC("Alloced heap size %p\n", heaplimit-heapbase);
     allocMarkBits();
@@ -926,7 +953,7 @@ void recoveryChildren(Object *ob,Object *system_loader) {
                 Object *ob = *body++;
                 TRACE_GC("Object at index %d is @%p\n", i, ob);
 
-                if(ob != NULL) recoveryClass(ob,system_loader);
+                if(ob != NULL) recoveryClass(ob);
             }
         } else {
             TRACE_GC("Array object @%p class is %s  - Not Scanning...\n",
@@ -939,7 +966,7 @@ void recoveryChildren(Object *ob,Object *system_loader) {
             if(IS_CLASS_CLASS(cb)) {
                 TRACE_GC("Found class object @%p name is %s\n", ob,
                          CLASS_CB(ob)->name);
-                recoveryClass(ob,system_loader);
+                recoveryClass(ob);
 
             } else if(IS_CLASS_LOADER(cb)) {
                 TRACE_GC("Mark found class loader object @%p class %s\n",
@@ -952,7 +979,7 @@ void recoveryChildren(Object *ob,Object *system_loader) {
                          " flags %d referent @%p\n",
                          ob, cb->name, cb->flags, referent);
 
-                recoveryClass(ob,system_loader);
+                recoveryClass(ob);
 
             } //else if(IS_CLASSLIB_SPECIAL(cb))
                 //classlibMarkSpecial(ob, mark);
@@ -972,7 +999,7 @@ void recoveryChildren(Object *ob,Object *system_loader) {
                 Object *ref = INST_DATA(ob, Object*, offset);
                 TRACE_GC("Offset %d reference @%p\n", offset, ref);
 
-                if(ref != NULL) recoveryClass(ref,system_loader);
+                if(ref != NULL) recoveryClass(ref);
             }
         }
     }
@@ -1060,8 +1087,8 @@ int scanHashforRecovery(Object *system_loader) {
     while(i < HASH_SIZE){
       ob = (Object*)hash[i].val;
       if(ob != NULL){
-        if(recoveryClass(ob,system_loader) == FALSE) return FALSE;
-        recoveryChildren(ob,system_loader);
+        if(recoveryClass(ob) == FALSE) return FALSE;
+        recoveryChildren(ob);
       }
       i++;
     }
@@ -1224,9 +1251,10 @@ void handleUnmarkedSpecial(Object *ob) {
 
 static uintptr_t recoverySweep(Thread *self) {
     char *ptr;
+    FILE *fp;
     Chunk newlist;
     Chunk *curr = NULL, *last = &newlist;
-
+    if(testing_mode) fp = fopen("rgc.txt","a+");
     /* Will hold the size of the largest free chunk
        after scanning */
     uintptr_t largest = 0;
@@ -1264,6 +1292,7 @@ static uintptr_t recoverySweep(Thread *self) {
 
             if(verbosegc) jam_printf("FREE: Freeing ob @%p class %s - start of block\n", ob,
                                   ob->class ? CLASS_CB(ob->class)->name : "?");
+            if(testing_mode) fprintf(fp, "%s\n", ob->class ? CLASS_CB(ob->class)->name  : "?");
         } else {
             size = hdr;
             if(verbosegc) jam_printf("FREE: Unalloced block @%p size %d - start of block\n",ptr, size);
@@ -1294,6 +1323,7 @@ static uintptr_t recoverySweep(Thread *self) {
 
                 if(verbosegc) jam_printf("FREE: Freeing object @%p class %s - merging onto block @%p\n",
                          ob, ob->class ? CLASS_CB(ob->class)->name : "?", curr);
+                if(testing_mode) fprintf(fp, "%s\n", ob->class ? CLASS_CB(ob->class)->name : "?" );
 
             } else {
                 if(verbosegc) jam_printf("FREE: unalloced block @%p size %d - merging onto block @%p\n",
@@ -1374,7 +1404,7 @@ out_last_marked:
 
     /* Return the size of the largest free chunk in heap - this
        is the largest allocation request that can be satisfied */
-
+    if(testing_mode) fclose(fp);
     return largest;
 }
 
@@ -2861,13 +2891,23 @@ int recoveryObject(){
 
 }
 
-int recoveryObjectClass(Object *system_loader){
-  if(IS_IMAGE_EXIST && system_loader != NULL){
+int recoveryObjectClass(){
+  if(IS_IMAGE_EXIST != NULL){
     jam_printf("recoveryObjectClass\n");
     //recoveryObject();
-    //return scanHashforRecovery(system_loader);
-    return TRUE;
+    reinitialiseSystemClass();
+    return scanHashforRecovery();
+    //return TRUE;
   }
+}
+
+int reCommit(Logs *log){
+  int i = 0;
+  while(log[i].handle != NULL){
+    log[i].handle = log[i].value;
+    i++;
+  }
+  return 1;
 }
 
 Object *allocTypeArray(int type, int size) {

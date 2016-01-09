@@ -110,7 +110,7 @@
 #define HAVE_UNISTD_H 1
 
 /* interpreter inlining */
-#define INLINING 1
+//#define INLINING 1
 
 /* Installation directory (prefix) */
 #define INSTALL_DIR "/usr/local/jamvm"

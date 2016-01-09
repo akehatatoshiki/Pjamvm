@@ -28,7 +28,7 @@
 // todo HT SIZE
 //1 << 10
 //Changed Default size of UTF8 hash 1 << 10
-#define HASHTABSZE 1<<13
+#define HASHTABSZE 1<<16
 #define HASH(ptr) utf8Hash(ptr)
 #define COMPARE(ptr1, ptr2, hash1, hash2) (ptr1 == ptr2) || \
                   (utf8Comp(ptr1, ptr2) && (hash1 == hash2))

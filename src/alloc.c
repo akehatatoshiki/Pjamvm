@@ -113,6 +113,7 @@ static int valgrind = FALSE;
 static int testing_mode = FALSE;
 static char *currentdir;
 static int first_ex = TRUE;
+static int nomal_end;
 
 uintptr_t get_freelist_header();
 struct chunk *get_freelist_next();
@@ -142,7 +143,7 @@ static int IS_HASH_EXIST = FALSE;
 #define HEAPADDR 		0x7f660022e000
 #define NVM_ADDRESS 	0x7f65ac16f000
 #define INCREASE_VALUE 	1000000
-#define NVM_INIT_SIZE 	100000000000
+#define NVM_INIT_SIZE 	10000000
 
 typedef struct nvmChunk{
 	int allocBit;
@@ -559,25 +560,22 @@ int initialiseAlloc(InitArgs *args) {
 	  if(IS_IMAGE_EXIST == TRUE){
       /* going to Recovery */
       if(!ph_value->flags_nomalend){
-        if(recoveryObjectClass() == FALSE){
-          jam_printf("Cannot recovery Object. Memoryimage is broken.\n");
-          return FALSE;
-        }
+        if(testing_mode) jam_printf("Nomal end flags isnt up\n");
+        nomal_end = FALSE;
+        first_ex = FALSE;
+      } else {
+        nomal_end = TRUE;
       }
       /* going to Recommit */
       if(ph_value->flags_commiting){
         reCommit((Logs*)ph_value->commit_log);
         ph_value->flags_commiting = FALSE;
       }
+      nvmFreeSpace = ph_value->nvmFreeSpace;
       *chunkpp = ph_value->chunkpp;
-      //printf("chunkpp ok \n");
       freelist->header = (uintptr_t)ph_value->freelist_header;
-      //printf("header ok \n");
       freelist->next = ph_value->freelist_next;
       heapfree = ph_value->heapfree;
-      nvmFreeSpace = ph_value->nvmFreeSpace;
-
-      //printf("javalang:%p\n", ph_value->java_lang_Class);
       set_java_lang_class(ph_value->java_lang_Class);
       set_ldr_vmdata_offset(ph_value->ldr_vmdata_offset);
     }else{
@@ -933,7 +931,7 @@ void markChildren(Object *ob, int mark, int mark_soft_refs) {
         }
     }
 }
-void recoveryChildren(Object *ob,Object *system_loader) {
+void recoveryChildren(Object *ob) {
     Class *class = ob->class;
     ClassBlock *cb = CLASS_CB(class);
 
@@ -1081,7 +1079,7 @@ void scanHeapAndMark(int mark_soft_refs) {
                  mark_stack_overflow);
     } while(mark_stack_overflow);
 }
-int scanHashforRecovery(Object *system_loader) {
+int scanHashforRecovery() {
     Object *ob;
     int i = 0;
     while(i < HASH_SIZE){
@@ -2861,39 +2859,40 @@ Object *allocObjectArray(Class *element_class, int length) {
 int recoveryObject(){
     if(IS_IMAGE_EXIST){
       if(testing_mode) jam_printf("Recovery persistence object\n");
+      /*
       Thread *self = threadSelf();
+      if(testing_mode) jam_printf("Current thread is %p\n",self);
       lockVMLock(has_fnlzr_lock, self);
       lockVMWaitLock(run_finaliser_lock, self);
       lockVMWaitLock(reference_lock, self);
-      /* Stop the world */
       disableSuspend(self);
-      suspendAllThreads(self);
+      suspendAllThreads(self);*/
       //doMark(self,TRUE);
       //if(testing_mode) scanHeap(TRUE);
       //clearMarkBits();
       markBootClasses();
       markJNIGlobalRefs();
-      scanThreads();
+      //scanThreads();
       if(IS_HASH_EXIST) markPersistenceObj();
       scanHeapAndMark(TRUE);
-      recoverySweep(self);
+      //recoverySweep(NULL);
       /* Restart the world */
-      resumeAllThreads(self);
-      enableSuspend(self);
+      //resumeAllThreads(self);
+      //enableSuspend(self);
       //if(testing_mode) scanHeap(TRUE);
-      /* Release the locks */
+      /* Release the locks
       unlockVMLock(has_fnlzr_lock, self);
       unlockVMWaitLock(reference_lock, self);
-      unlockVMWaitLock(run_finaliser_lock, self);
+      unlockVMWaitLock(run_finaliser_lock, self);*/
       return TRUE;
     }
     return TRUE;
 
 }
 
-int recoveryObjectClass(){
-  if(IS_IMAGE_EXIST != NULL){
-    jam_printf("recoveryObjectClass\n");
+int recoverySystems(){
+  if(IS_IMAGE_EXIST){
+    jam_printf("recoverySystems\n");
     //recoveryObject();
     reinitialiseSystemClass();
     return scanHashforRecovery();
@@ -3241,6 +3240,8 @@ void freePendingFrees() {
 
 /* ------ Allocation from system heap ------- */
 /* MREMAP MAYMOVE ISSUE */
+void msync_nvm();
+
 void expandNVM(){
 	unsigned int oldSize = nvmCurrentSize;
 	nvmChunk *new;
@@ -3345,6 +3346,7 @@ void *sysMalloc_persistent(int size){
 		nvmFreeSpace = nvmFreeSpace - found->chunkSize;
 		/* clear chunk */
 		memset(ret_addr, 0, found->chunkSize);
+    msync_nvm();
 		//msync(nvm, nvmCurrentSize, MS_SYNC);
 		return ret_addr;
 	}else
@@ -3361,6 +3363,7 @@ void sysFree_persistent(void* addr){
 		nvmFreeSpace = nvmFreeSpace + toFree->chunkSize;
 		/* clear chunk */
 		memset(ptr, 0, toFree->chunkSize);
+    msync_nvm();
 		//msync(nvm, nvmCurrentSize, MS_SYNC);
 	}else
 		sysFree(addr);
@@ -3417,6 +3420,13 @@ void sysFree(void *addr) {
   //if(testing_mode) jam_printf("sysFree:%p\n",addr);
   if(addr != NULL){
 	   free(addr);
+  }
+}
+void msync_nvm(){
+  char *tmp = nvm;
+  if(msync(tmp-sizeof(OPC), nvmCurrentSize, MS_SYNC)  != 0){
+    printf("%d\n",errno);
+    perror("msync failed. Couldnt sync image file\n");
   }
 }
 
@@ -3485,4 +3495,9 @@ Object ** get_has_finaliser_list(){
 int is_first_exp(){
   if(first_ex) return TRUE;
   else FALSE;
+}
+
+int is_abnormal_term(){
+  if(nomal_end) return FALSE;
+  else TRUE;
 }

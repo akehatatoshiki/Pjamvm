@@ -40,7 +40,7 @@ static int is_persistent = 0;
 static MethodBlock *vm_loader_create_package = NULL;
 static Class *package_array_class;
 
-#define CLASS_INITSZE 1<<8
+#define CLASS_INITSZE 1<<16
 
 void classlibCacheClassLoaderFields(Class *loader_class) {
     FieldBlock *ldr_fb = findField(loader_class, SYMBOL(vmdata),
@@ -71,7 +71,7 @@ HashTable *classlibCreateLoaderTable(Object *class_loader) {
     if(vmdata == NULL)
         return NULL;
 
-    table = sysMalloc_persistent(sizeof(HashTable));  //?
+    table = sysMalloc_persistent(sizeof(HashTable));
     initHashTable((*table), CLASS_INITSZE, TRUE,class_name,TRUE);
     INST_DATA(vmdata, HashTable*, ldr_data_tbl_offset) = table;
     INST_DATA(class_loader, Object*, ldr_vmdata_offset) = vmdata;

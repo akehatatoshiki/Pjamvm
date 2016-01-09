@@ -71,9 +71,9 @@ interp.lo: interp.c /usr/include/stdc-predef.h /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/setjmp2.h ../../../src/lock.h \
  ../../../src/thread.h ../../../src/excep.h ../../../src/classlib-excep.h \
  ../../../src/symbol.h ../../../src/classlib-symbol.h \
- ../../../src/frame.h interp.h ../../../src/properties.h \
- interp-inlining.h interp-threading.h interp-direct-common.h \
- ../../../src/hash.h ../../../src/class.h ../../../src/classlib.h
+ ../../../src/frame.h interp.h ../../../src/properties.h interp-direct.h \
+ interp-threading.h interp-direct-common.h ../../../src/hash.h \
+ ../../../src/class.h ../../../src/classlib.h
 
 /usr/include/stdc-predef.h:
 
@@ -273,7 +273,7 @@ interp.h:
 
 ../../../src/properties.h:
 
-interp-inlining.h:
+interp-direct.h:
 
 interp-threading.h:
 

@@ -2002,7 +2002,7 @@ int reinitialiseNativeMethods(){
 
 void reinitialiseSystemClass(){
   int i;
-
+  jam_printf("<Class: Try to reinit SystemClass>\n");
   hashIterate(boot_classes);
   hashIterate(boot_packages);
 
@@ -2045,7 +2045,7 @@ int recoveryClass(Object *root){
     jam_printf("Try to recovery Object:%p Class:%p name:%s\n",root,old_class,classname);
     int counts = old_cb->fields_count;
     int i;
-    if((root->class = findClassFromClassLoader(classname,system_loader)) == NULL){
+    if((root->class = findClassFromClassLoader(classname,getSystemClassLoader())) == NULL){
       jam_printf("Recovery Object Class failed\n");
       return FALSE;
     }

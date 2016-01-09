@@ -278,7 +278,7 @@ int main(int argc, char *argv[]) {
         exit(1);
       }
     }*/
-    if(testmode) printf("Pjamvm version:0.9.1.5\n"); //0.9.1.0:Successed Repeating restore/save Objects!
+    if(testmode) printf("Pjamvm version:0.9.5.0\n"); //0.9.5.0:Successed RecoverySystems and execute ccstm
     args.main_stack_base = &array_class;
 
     if(!initVM(&args)) {
@@ -313,7 +313,6 @@ int main(int argc, char *argv[]) {
         goto error;
     }
     if(testmode) printf("Loading main class is complete\n");
-    if(is_persistent) recoveryObjectClass(system_loader);
     /* Create the String array holding the command line args */
 
     i = class_arg + 1;

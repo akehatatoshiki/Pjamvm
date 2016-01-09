@@ -941,7 +941,7 @@ extern int initialiseAlloc(InitArgs *args);
 extern int initialiseGC(InitArgs *args);
 extern int initFiles(int fd,long size);
 extern int recoveryObject();
-extern int recoveryObjectClass(Object *system_loader);
+extern int recoverySystems();
 extern Class *allocClass();
 extern Object *allocObject(Class *class);
 extern Object *allocTypeArray(int type, int size);
@@ -951,7 +951,9 @@ extern Object *allocMultiArray(Class *array_class, int dim, intptr_t *count);
 extern Object *cloneObject(Object *ob);
 extern uintptr_t getObjectHashcode(Object *ob);
 
+extern int is_abnormal_term();
 extern int is_first_exp();
+
 extern void gc1();
 extern void runFinalizers();
 
@@ -1038,7 +1040,7 @@ extern Class *findPrimitiveClassByName(char *name);
 extern Class *findHashedClass(char *name, Object *loader);
 extern Class *findClassFromClassLoader(char *name, Object *loader);
 extern Class *findArrayClassFromClassLoader(char *name, Object *loader);
-extern int recoveryClass(Object *root,Object *system_loader);
+extern int recoveryClass(Object *root);
 
 extern Object *getSystemClassLoader();
 

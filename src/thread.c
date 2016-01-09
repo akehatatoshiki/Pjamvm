@@ -1268,7 +1268,9 @@ void exitVM(int status) {
     if(msync(ph_values,sizeof(ph_values),MS_SYNC) != 0) perror("msync(sysExit)");
     if(testing_mode) jam_printf("OPC written for img. %p \n",ph_values);
     //if(testing_mode) calldoMark();
+    ph_values->flags_nomalend = TRUE;
     sysExit();
+    //ph_values->flags_commiting = FALSE;
 	}
 
     /* Execute System.exit() to run any registered shutdown hooks.

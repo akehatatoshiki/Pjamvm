@@ -34,7 +34,7 @@ static int ldr_data_tbl_offset;
 
 /*	XXX	NVM VARIABLES - CLASS.C	*/
 static char* class_name = "classes_ht";
-static int is_persistent = 0;
+static int is_persistent = FALSE;
 /* Helper method to create a Package Object representing a
    package loaded by the boot loader */
 static MethodBlock *vm_loader_create_package = NULL;
@@ -57,7 +57,6 @@ void classlibCacheClassLoaderFields(Class *loader_class) {
 
 HashTable *classlibLoaderTable(Object *class_loader) {
     Object *vmdata = INST_DATA(class_loader, Object*, ldr_vmdata_offset);
-
     if(vmdata == NULL)
         return NULL;
 
@@ -72,10 +71,15 @@ HashTable *classlibCreateLoaderTable(Object *class_loader) {
         return NULL;
 
     table = sysMalloc_persistent(sizeof(HashTable));
-    initHashTable((*table), CLASS_INITSZE, TRUE,class_name,TRUE);
+    initHashTable((*table), CLASS_INITSZE, TRUE,class_name,TRUE);\
+    if(is_persistent){
+      OPC *ph_value = get_opc_ptr();
+      (*table).hash_count = ph_value->classes_hash_count;
+    }
     INST_DATA(vmdata, HashTable*, ldr_data_tbl_offset) = table;
     INST_DATA(class_loader, Object*, ldr_vmdata_offset) = vmdata;
     //msync(table,CLASS_INITSZE,MS_SYNC);
+    //jam_printf("< classlibCreateLoaderTable table:%p >\n",table);
     return table;
 }
 
@@ -196,4 +200,13 @@ int classlibInitialiseClass(int p) {
     }
 
     return TRUE;
+}
+
+/*	XXX NVM CHANGE 009.002.000	*/
+int get_ldr_vmdata_offset(){
+	return ldr_vmdata_offset;
+}
+/*	XXX NVM CHANGE 009.002.001	*/
+void set_ldr_vmdata_offset(int ldr){
+	ldr_vmdata_offset = ldr;
 }

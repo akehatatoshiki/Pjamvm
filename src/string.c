@@ -27,7 +27,7 @@
 #include "hash.h"
 #include "symbol.h"
 
-#define HASHTABSZE 1<<10
+#define HASHTABSZE 1<<16
 #define HASH(ptr) stringHash(ptr)
 #define COMPARE(ptr1, ptr2, hash1, hash2) (ptr1 == ptr2) || \
                   ((hash1 == hash2) && stringComp(ptr1, ptr2))

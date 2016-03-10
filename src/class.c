@@ -155,7 +155,7 @@ static Class *addClassToHash(Class *class, Object *class_loader) {
       findHashEntry((*table), class, entry, TRUE, FALSE, TRUE, class_name, TRUE );
       class_HC = table->hash_count;
       msync_class(table);
-      if(strcmp(CLASS_CB(entry)->name,"TAKAO/TAKAONative") == 0)jam_printf("added :%s,%p\n",CLASS_CB(entry)->name,entry);
+      //if(testing_mode)jam_printf("added :%s,%p,count:%d\n",CLASS_CB(entry)->name,entry,class_HC);
     }
     //printf("added :%s,%p\n",CLASS_CB(entry)->name,entry);
     return entry;
@@ -1238,7 +1238,6 @@ void linkClass(Class *class) {
    fastDisableSuspend(self);
 
    cb->imethod_table_size = spr_imthd_tbl_sze + new_itable_count;
-
    /* copy parent's interface table - the offsets into the method
       table won't change */
 
@@ -1966,7 +1965,7 @@ Class *findClassFromClassLoader(char *classname, Object *loader) {
 
 int reinitClass(char *name){
   Object *excep;
-  if(testing_mode) jam_printf("<Class: Try to reinit using native method class %s>\n",name);
+  //if(testing_mode) jam_printf("<Class: Try to reinit using native method class %s>\n",name);
   Class *class = findHashedClass(name, NULL);
   if(!class){
     class = findClassFromClassLoader(name,getSystemClassLoader());
@@ -1982,7 +1981,7 @@ int reinitClass(char *name){
   excep = exceptionOccurred();
   if(!exceptionOccurred()) initClass(class);
   if(!exceptionOccurred()){
-    jam_printf("<Class: reinited using native method class %s>\n",name);
+    if(testing_mode) jam_printf("<Class: reinited using native method class %s>\n",name);
     return TRUE;
   }else{
     jam_printf("<Class: Exception occourd in reinit %s>\n",CLASS_CB(excep->class)->name);
@@ -2005,16 +2004,25 @@ void reinitialiseSystemClass(){
   jam_printf("<Class: Try to reinit SystemClass>\n");
   hashIterate(boot_classes);
   hashIterate(boot_packages);
+  reinitialisejava_lang_class();
 
 }
 
+void initClassLoaderTable(){
+
+  Class *class_loader;
+  class_loader = findSystemClass(SYMBOL(java_lang_ClassLoader));
+  if(!is_first_exp() || !is_classloader_init){
+    classlibCreateLoaderTable(class_loader);
+    is_classloader_init = TRUE;
+  }
+}
 
 Object *getSystemClassLoader() {
     Class *class_loader;
-    if(!is_first_exp() && !is_classloader_init){
-      class_loader = loadSystemClass(SYMBOL(java_lang_ClassLoader));
-      if(!exceptionOccurred()) linkClass(class_loader);
-      if(!exceptionOccurred()) initClass(class_loader);
+    class_loader = findSystemClass(SYMBOL(java_lang_ClassLoader));
+    if(!is_first_exp() || !is_classloader_init){
+      classlibCreateLoaderTable(class_loader);
       is_classloader_init = TRUE;
     }else{
       class_loader = findSystemClass(SYMBOL(java_lang_ClassLoader));
@@ -2138,7 +2146,20 @@ void threadBootClasses() {
 
 void markLoaderClasses(Object *class_loader, int mark) {
     HashTable *table = classlibLoaderTable(class_loader);
+    jam_printf("< markLoaderClasses class_loader:%p table :%p count:%d>\n",class_loader,table,(*table).hash_count);
+    if(table != NULL) {
+        hashIterate((*table));
+    }
+}
 
+#undef ITERATE
+#define ITERATE(ptr)                                         \
+    jam_printf("< checkLoaderClasses name:%s ptr:%p>\n",CLASS_CB((Class *)ptr)->name,ptr)
+
+void checkLoaderClasses() {
+    Object *class_loader = getSystemClassLoader();
+    HashTable *table = classlibLoaderTable(class_loader);
+    jam_printf("< checkLoaderClasses class_loader:%p table :%p count:%d>\n",class_loader,table,(*table).hash_count);
     if(table != NULL) {
         hashIterate((*table));
     }
@@ -2263,12 +2284,14 @@ void freeClassData(Class *class) {
     gcPendingFree(cb->methods);
     gcPendingFree(cb->inner_classes);
 
-    if(cb->state >= CLASS_LINKED) {
-        ClassBlock *super_cb = CLASS_CB(cb->super);
+    Class *super = (cb->access_flags & ACC_INTERFACE) ? NULL : cb->super;
+    if(cb->state >= CLASS_LINKED && super) {
 
+        ClassBlock *super_cb = CLASS_CB(super);
         /* interfaces do not have a method table, or
             imethod table offsets */
         if(!IS_INTERFACE(cb)) {
+
             int spr_imthd_sze = super_cb->imethod_table_size;
 
             gcPendingFree(cb->method_table);
@@ -2500,6 +2523,11 @@ out:
     return res;
 }
 
+void set_prim_classes(){
+	OPC *ph_values = get_opc_ptr();
+	memcpy(prim_classes, ph_values->prim_classes, sizeof(prim_classes));
+}
+
 int initialiseClassStage1(InitArgs *args) {
     struct stat st;
     verbose = args->verboseclass;
@@ -2518,7 +2546,13 @@ int initialiseClassStage1(InitArgs *args) {
 
     /* Register the address of where the java.lang.Class ref _will_ be */
     registerStaticClassRef(&java_lang_Class);
-
+    if(is_persistent){
+      OPC *ph_value = get_opc_ptr();
+      boot_classes.hash_count = ph_value->boot_classes_hash_count;
+      boot_packages.hash_count = ph_value->boot_packages_hash_count;
+      class_HC = ph_value->classes_hash_count;
+      set_prim_classes();
+  }
     /* Do classlib specific class initialisation */
     if(!classlibInitialiseClass(args->persistence)) {
         jam_fprintf(stderr, "Error initialising VM (initialiseClassStage1)\n");
@@ -2550,14 +2584,17 @@ int initialiseClassStage2() {
 
     return TRUE;
 }
-/*	XXX NVM CHANGE 009.002.000	*/
-int get_ldr_vmdata_offset(){
-	return ldr_vmdata_offset;
+
+int reinitialisejava_lang_class(){
+  if(initClass(java_lang_Class) == NULL) {
+      jam_fprintf(stderr, "Error initialising VM (initialiseClassStage2)\n"
+                          "java.lang.Class could not be initialised!\n");
+      return FALSE;
+  }
+  return TRUE;
 }
-/*	XXX NVM CHANGE 009.002.001	*/
-void set_ldr_vmdata_offset(int ldr){
-	ldr_vmdata_offset = ldr;
-}
+
+
 
 
 /*	XXX NVM CHANGE 009.002.002	*/

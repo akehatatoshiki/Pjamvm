@@ -993,6 +993,7 @@ extern void set_has_finaliser_list();
 extern int get_has_finaliser_count();
 extern int get_has_finaliser_size();
 extern Object ** get_has_finaliser_list();
+extern void print_sysMalloc_tooktime();
 
 
 extern void registerStaticObjectRef(Object **ref);
@@ -1031,6 +1032,7 @@ extern void linkClass(Class *class);
 extern Class *initClass(Class *class);
 extern int reinitClass(char *name);
 extern void  reinitialiseSystemClass();
+extern int reinitialisejava_lang_class();
 extern Class *findSystemClass(char *name);
 extern Class *findSystemClass0(char *name);
 extern Class *loadSystemClass(char *name);
@@ -1042,6 +1044,9 @@ extern Class *findClassFromClassLoader(char *name, Object *loader);
 extern Class *findArrayClassFromClassLoader(char *name, Object *loader);
 extern int recoveryClass(Object *root);
 
+extern void checkLoaderClasses();
+
+extern void initClassLoaderTable();
 extern Object *getSystemClassLoader();
 
 extern int bootClassPathSize();

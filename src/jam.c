@@ -316,7 +316,7 @@ int main(int argc, char *argv[]) {
     /* Create the String array holding the command line args */
 
     i = class_arg + 1;
-    if(testmode) printf("Try to find ArrayClass \n");
+    //  if(testmode) printf("Try to find ArrayClass \n");
     if((array_class = findArrayClass(SYMBOL(array_java_lang_String))) &&
            (array = allocArray(array_class, argc - i, sizeof(Object*))))  {
         Object **args = ARRAY_DATA(array, Object*) - i;

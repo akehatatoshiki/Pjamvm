@@ -77,7 +77,7 @@ error:
 }
 
 Object *exceptionOccurred() {
-   //jam_printf("exception was %s\n",CLASS_CB(getExecEnv()->exception->class)->name);
+   //if(getExecEnv()->exception) jam_printf("exception was %s\n",CLASS_CB(getExecEnv()->exception->class)->name);
    return getExecEnv()->exception;
 }
 
@@ -157,7 +157,6 @@ Object *exceptionEnumToException(int excep_enum) {
 void printException() {
     ExecEnv *ee = getExecEnv();
     Object *excep = ee->exception;
-
     if(excep != NULL) {
         MethodBlock *mb = lookupMethod(excep->class, SYMBOL(printStackTrace),
                                                      SYMBOL(___V));

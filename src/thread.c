@@ -1245,6 +1245,7 @@ void exitVM(int status) {
 	/*	XXX NVM CHANGE 009.000.002	*/
 	if(is_persistent == TRUE){
     //gc1();
+    recoveryObject();
 		OPC *ph_values = get_opc_ptr();
 		ph_values->chunkpp = get_chunkpp();
 		ph_values->freelist_header = get_freelist_header();
@@ -1264,13 +1265,11 @@ void exitVM(int status) {
 		ph_values->has_finaliser_size = get_has_finaliser_size();
 		ph_values->has_finaliser_list = sysMalloc_persistent(ph_values->has_finaliser_size*sizeof(Object*));
 		memcpy(ph_values->has_finaliser_list, get_has_finaliser_list(), ph_values->has_finaliser_size*sizeof(Object*));
-    //rename("classes_ht","classes_ht_backup");
     if(msync(ph_values,sizeof(ph_values),MS_SYNC) != 0) perror("msync(sysExit)");
     if(testing_mode) jam_printf("OPC written for img. %p \n",ph_values);
-    //if(testing_mode) calldoMark();
     ph_values->flags_nomalend = TRUE;
+    if(testing_mode)print_sysMalloc_tooktime();
     sysExit();
-    //ph_values->flags_commiting = FALSE;
 	}
 
     /* Execute System.exit() to run any registered shutdown hooks.
@@ -1281,13 +1280,12 @@ void exitVM(int status) {
         Class *system = findSystemClass(SYMBOL(java_lang_System));
         if(system) {
             MethodBlock *exit = findMethod(system, SYMBOL(exit), SYMBOL(_I__V));
-            jam_printf("%s\n",exit->name);
             if(exit)
                 executeStaticMethod(system, exit, status);
         }
     }
-
     jamvm_exit(status);
+
 }
 
 void mainThreadWaitToExitVM() {
@@ -1429,11 +1427,13 @@ int initialiseThreadStage2(InitArgs *args) {
     if(main_group == NULL)
         goto error;
 
+
     /* Initialise the Java-level thread objects for the main thread */
     java_thread = initJavaThread(&main_thread, FALSE, "main", main_group);
     if(java_thread == NULL)
         goto error;
 
+    //if(testing_mode) jam_printf("try to classlibSetThreadState\n");
     classlibSetThreadState(&main_thread, RUNNING);
 
     /* Setup signal handling.  This will be inherited by all
@@ -1451,6 +1451,7 @@ int initialiseThreadStage2(InitArgs *args) {
        (user-termination of the VM, e.g. via Ctrl-C).  Note it
        must be a valid Java-level thread as it needs to run the
        shutdown hooks in the event of user-termination */
+
     createVMThread("Signal Handler", classlibSignalThread);
     if(testing_mode) jam_printf("initialised Thread Stage2\n");
     return TRUE;

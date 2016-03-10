@@ -39,7 +39,7 @@
 #include <fcntl.h>
 
 /* Common definitions needed for hashtable */
-#define HASHTABSZE 1<<8
+#define HASHTABSZE 1<<16
 #define PREPARE(ptr) ptr
 #define SCAVENGE(ptr) FALSE
 #define FOUND(ptr1, ptr2) ptr2

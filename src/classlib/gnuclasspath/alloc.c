@@ -43,4 +43,3 @@ void classlibHandleUnmarkedSpecial(Object *ob) {
         gcPendingFree(vmThread2Thread(ob));
     }
 }
-

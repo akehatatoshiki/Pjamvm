@@ -44,7 +44,7 @@ void unlockHashTable0(HashTable *table, Thread *self) {
 /* XXX NVM CHANGE 006.002 - Resize Hash */
 void resizeHash(HashTable *table, int new_size, char* name , int create_file) {
     /* XXX NVM CHANGE 005.001.011 - Resize Hash*/
-    //jam_printf("Try to Realloc :%s\n",name);
+    jam_printf("Try to Realloc :%s\n",name);
   	HashEntry *new_table = (HashEntry*)pMemMalloc(sizeof(HashEntry)*new_size, "temp", create_file);
     //HashEntry *new_table = (HashEntry*)gcMemMalloc(sizeof(HashEntry)*new_size);
     int i;

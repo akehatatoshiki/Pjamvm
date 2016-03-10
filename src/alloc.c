@@ -26,6 +26,7 @@
 #include <sys/types.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
+#include <time.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <limits.h>
@@ -114,6 +115,7 @@ static int testing_mode = FALSE;
 static char *currentdir;
 static int first_ex = TRUE;
 static int nomal_end;
+static double sysMalloctooktime;
 
 uintptr_t get_freelist_header();
 struct chunk *get_freelist_next();
@@ -572,7 +574,7 @@ int initialiseAlloc(InitArgs *args) {
         ph_value->flags_commiting = FALSE;
       }
       nvmFreeSpace = ph_value->nvmFreeSpace;
-      *chunkpp = ph_value->chunkpp;
+      *chunkpp = (Chunk*)ph_value->chunkpp;
       freelist->header = (uintptr_t)ph_value->freelist_header;
       freelist->next = ph_value->freelist_next;
       heapfree = ph_value->heapfree;
@@ -583,9 +585,11 @@ int initialiseAlloc(InitArgs *args) {
       freelist->next = 0;
     }
 
-    if(is_persistent) ph_value->flags_nomalend = FALSE;
+    if(is_persistent) {
+      ph_value->flags_nomalend = FALSE;
+      msync_nvm();
+    }
 
-    //if(testing_mode) jam_printf("freelist initialised\n");
     TRACE_GC("Alloced heap size %p\n", heaplimit-heapbase);
     allocMarkBits();
 
@@ -699,6 +703,11 @@ void markPersistenceObj(){
     }
     i++;
   }
+}
+
+void markJavaLangClass(){
+  markConservativeRoot(get_java_lang_class());
+  markChildren(get_java_lang_class(),TRUE,TRUE);
 }
 
 /* This function marks the placeholder objects, keeping them from
@@ -844,7 +853,9 @@ void markChildren(Object *ob, int mark, int mark_soft_refs) {
         return;
 
     if(mark > IS_MARKED(class))
-        MARK_AND_PUSH(class, mark);
+      MARK_AND_PUSH(class, mark);
+
+
 
     if(cb->name[0] == '[') {
         if((cb->name[1] == 'L') || (cb->name[1] == '[')) {
@@ -922,6 +933,7 @@ void markChildren(Object *ob, int mark, int mark_soft_refs) {
             int end = cb->refs_offsets_table[i].end;
 
             for(; offset < end; offset += sizeof(Object*)) {
+                //if(testing_mode)jam_printf("offset:%d end:%d \n",offset,end);
                 Object *ref = INST_DATA(ob, Object*, offset);
                 TRACE_GC("Offset %d reference @%p\n", offset, ref);
 
@@ -930,6 +942,7 @@ void markChildren(Object *ob, int mark, int mark_soft_refs) {
             }
         }
     }
+
 }
 void recoveryChildren(Object *ob) {
     Class *class = ob->class;
@@ -1034,6 +1047,7 @@ void recoveryChildren(Object *ob) {
 
 void markStack(int mark_soft_refs) {
     while(mark_stack_count > 0) {
+
         Object *object = mark_stack[--mark_stack_count];
         int mark = IS_MARKED(object);
 
@@ -1065,7 +1079,7 @@ void scanHeap(int mark_soft_refs) {
         /* Skip to next block */
         mark_scan_ptr += size;
     }
-    if(testing_mode) jam_printf("Heap has %d marked objects size: %d\n",num,sum_size);
+    TRACE_GC("Heap has %d marked objects size: %d\n",num,sum_size);
 }
 
 void scanHeapAndMark(int mark_soft_refs) {
@@ -1247,165 +1261,6 @@ void handleUnmarkedSpecial(Object *ob) {
                 classlibHandleUnmarkedSpecial(ob);
 }
 
-static uintptr_t recoverySweep(Thread *self) {
-    char *ptr;
-    FILE *fp;
-    Chunk newlist;
-    Chunk *curr = NULL, *last = &newlist;
-    if(testing_mode) fp = fopen("rgc.txt","a+");
-    /* Will hold the size of the largest free chunk
-       after scanning */
-    uintptr_t largest = 0;
-
-    /* Variables used to store verbose gc info */
-    uintptr_t marked = 0, unmarked = 0, freed = 0, cleared = 0;
-
-    /* Amount of free heap is re-calculated during scan */
-    heapfree = 0;
-
-    /* Scan the heap and free all unmarked objects by reconstructing
-       the freelist.  Add all free chunks and unmarked objects and
-       merge adjacent free chunks into contiguous areas */
-
-    for(ptr = heapbase; ptr < heaplimit; ) {
-        uintptr_t hdr = HEADER(ptr);
-        uintptr_t size;
-        Object *ob;
-
-        curr = (Chunk *) ptr;
-
-        if(HDR_ALLOCED(hdr)) {
-            ob = (Object*)(ptr+HEADER_SIZE);
-            size = HDR_SIZE(hdr);
-
-            if(IS_MARKED(ob))
-                goto marked;
-
-            freed += size;
-            unmarked++;
-
-
-            /* Clear any set flag bits within the header */
-            curr->header &= HDR_FLAGS_MASK;
-
-            if(verbosegc) jam_printf("FREE: Freeing ob @%p class %s - start of block\n", ob,
-                                  ob->class ? CLASS_CB(ob->class)->name : "?");
-            if(testing_mode) fprintf(fp, "%s\n", ob->class ? CLASS_CB(ob->class)->name  : "?");
-        } else {
-            size = hdr;
-            if(verbosegc) jam_printf("FREE: Unalloced block @%p size %d - start of block\n",ptr, size);
-
-        }
-
-        /* Scan the next chunks - while they are
-           free, merge them onto the first free
-           chunk */
-
-        for(;;) {
-            ptr += size;
-
-            if(ptr >= heaplimit)
-                goto out_last_free;
-
-            hdr = HEADER(ptr);
-            if(HDR_ALLOCED(hdr)) {
-                ob = (Object*)(ptr+HEADER_SIZE);
-                size = HDR_SIZE(hdr);
-
-                if(IS_MARKED(ob))
-                    break;
-
-                freed += size;
-                unmarked++;
-
-
-                if(verbosegc) jam_printf("FREE: Freeing object @%p class %s - merging onto block @%p\n",
-                         ob, ob->class ? CLASS_CB(ob->class)->name : "?", curr);
-                if(testing_mode) fprintf(fp, "%s\n", ob->class ? CLASS_CB(ob->class)->name : "?" );
-
-            } else {
-                if(verbosegc) jam_printf("FREE: unalloced block @%p size %d - merging onto block @%p\n",
-                         ptr, size, curr);
-                size = hdr;
-            }
-
-            curr->header += size;
-        }
-
-        /* Scanned to next marked object see
-           if it's the largest so far */
-        if(curr->header > largest)
-            largest = curr->header;
-
-        /* Add onto total count of free chunks */
-        heapfree += curr->header;
-
-       /* Add chunk onto the freelist only if it's
-          large enough to hold an object */
-        if(curr->header >= MIN_OBJECT_SIZE) {
-            last->next = curr;
-            last = curr;
-        }
-
-marked:
-        marked++;
-
-        //if(HDR_SPECIAL_OBJ(hdr) && ob->class != NULL)
-            //cleared++;
-
-        /* Skip to next block */
-        ptr += size;
-
-        if(ptr >= heaplimit)
-            goto out_last_marked;
-    }
-
-out_last_free:
-
-    /* Last chunk is free - need to check if
-       largest */
-    if(curr->header > largest)
-        largest = curr->header;
-
-    heapfree += curr->header;
-
-    /* Add chunk onto the freelist only if it's
-       large enough to hold an object */
-    if(curr->header >= MIN_OBJECT_SIZE) {
-        last->next = curr;
-        last = curr;
-    }
-
-out_last_marked:
-
-    /* We've now reconstructed the freelist, set freelist
-       pointer to new list */
-    last->next = NULL;
-    freelist = newlist.next;
-
-    /* Reset next allocation block to beginning of list -
-       this leads to a search - use largest instead? */
-    chunkpp = &freelist;
-
-    if(verbosegc) {
-        long long size = heaplimit-heapbase;
-        long long pcnt_used = ((long long)heapfree)*100/size;
-        jam_printf("<GC: Allocated objects: %lld>\n", (long long)marked);
-        jam_printf("<GC: Freed %lld object(s) using %lld bytes",
-			(long long)unmarked, (long long)freed);
-        if(cleared)
-            jam_printf(", cleared %lld reference(s)", (long long)cleared);
-        jam_printf(">\n<GC: Largest block is %lld total free is %lld out of"
-                   " %lld (%lld%%)>\n", (long long)largest,
-                   (long long)heapfree, size, pcnt_used);
-    }
-
-    /* Return the size of the largest free chunk in heap - this
-       is the largest allocation request that can be satisfied */
-    if(testing_mode) fclose(fp);
-    return largest;
-}
-
 static uintptr_t doSweep(Thread *self) {
     char *ptr;
     Chunk newlist;
@@ -1546,6 +1401,21 @@ out_last_marked:
     /* Reset next allocation block to beginning of list -
        this leads to a search - use largest instead? */
     chunkpp = &freelist;
+
+    if(testing_mode) {
+        jam_printf("<GC chunkpp:%p next:%p>\n",*chunkpp,&(*chunkpp)->next);
+        long long size = heaplimit-heapbase;
+        long long pcnt_used = ((long long)heapfree)*100/size;
+        jam_printf("<RGC: Allocated objects: %lld>\n", (long long)marked);
+        jam_printf("<RGC: Freed %lld object(s) using %lld bytes",
+      (long long)unmarked, (long long)freed);
+        if(cleared)
+            jam_printf(", cleared %lld reference(s)", (long long)cleared);
+        jam_printf(">\n<RGC: Largest block is %lld total free is %lld out of"
+                   " %lld (%lld%%)>\n", (long long)largest,
+                   (long long)heapfree, size, pcnt_used);
+        jam_printf("<RGC Pheap usage amount after RGC %lld>\n",size-heapfree);
+    }
 
     if(verbosegc) {
         long long size = heaplimit-heapbase;
@@ -2351,10 +2221,12 @@ unsigned long gc0(int mark_soft_refs, int compact) {
        a reference after the reference scans */
 
     /* Potential threads adding a newly created object */
+
     lockVMLock(has_fnlzr_lock, self);
 
     /* Held by the finaliser thread */
     lockVMWaitLock(run_finaliser_lock, self);
+
 
     /* Held by the reference handler thread */
     lockVMWaitLock(reference_lock, self);
@@ -2364,6 +2236,7 @@ unsigned long gc0(int mark_soft_refs, int compact) {
     suspendAllThreads(self);
 
     if(verbosegc) {
+        jam_printf("<GC: Start GC 0/2>\n");
         struct timeval start;
         float mark_time;
         float scan_time;
@@ -2373,9 +2246,10 @@ unsigned long gc0(int mark_soft_refs, int compact) {
         mark_time = endTime(&start)/1000000.0;
 
         getTime(&start);
+        jam_printf("<GC: End Mark 1/2>\n");
         largest = compact ? doCompact() : doSweep(self);
         scan_time = endTime(&start)/1000000.0;
-
+        jam_printf("<GC: End Sweep 2/2>\n");
         jam_printf("<GC: Mark took %f seconds, %s took %f seconds>\n",
                            mark_time, compact ? "compact" : "scan", scan_time);
     } else {
@@ -2401,7 +2275,6 @@ unsigned long gc0(int mark_soft_refs, int compact) {
     unlockVMLock(has_fnlzr_lock, self);
     unlockVMWaitLock(reference_lock, self);
     unlockVMWaitLock(run_finaliser_lock, self);
-
     freeConservativeRoots();
     freePendingFrees();
 
@@ -2551,25 +2424,40 @@ void referenceHandlerThreadLoop(Thread *self) {
                         "<GC: enqueuing %d references>\n", self, &self);
 }
 
+void set_has_finaliser_list(){
+    OPC *ph_values = get_opc_ptr();
+	  has_finaliser_count = ph_values->has_finaliser_count;
+	  has_finaliser_size = ph_values->has_finaliser_size;
+	  has_finaliser_list = sysMalloc(has_finaliser_size*sizeof(Object*));
+    memcpy(has_finaliser_list, ph_values->has_finaliser_list, has_finaliser_size*sizeof(Object*));
+    sysFree_persistent(ph_values->has_finaliser_list);
+}
+
 int initialiseGC(InitArgs *args) {
     /* Pre-allocate an OutOfMemoryError exception object - we throw it
      * when we're really low on heap space, and can create FA... */
 
     MethodBlock *init;
+    //if(is_persistent && IS_HASH_EXIST) reinitClass(SYMBOL(java_lang_OutOfMemoryError));
     Class *oom_clazz = findSystemClass(SYMBOL(java_lang_OutOfMemoryError));
     if(exceptionOccurred()) {
         printException();
         return FALSE;
     }
 
-    /* Initialize it */
-    init = lookupMethod(oom_clazz, SYMBOL(object_init),
+    if(is_first_exp){
+      /* Initialize it */
+      init = lookupMethod(oom_clazz, SYMBOL(object_init),
                                    SYMBOL(_java_lang_String__V));
-    oom = allocObject(oom_clazz);
-    registerStaticObjectRef(&oom);
-    //jam_printf("oom:%p ,md:%p\n",oom,init);
-    executeMethod(oom, init, NULL);
+      oom = allocObject(oom_clazz);
+      registerStaticObjectRef(&oom);
+      //if(testing_mode)jam_printf("oom:%p ,md:%p\n",oom,init);
+      executeMethod(oom, init, NULL);
+    }else{
+      set_has_finaliser_list();
+    }
 
+    //if(testing_mode)jam_printf("CrteateVMThread\n");
     /* Create and start VM threads for the reference handler and finalizer */
     createVMThread("Finalizer", finalizerThreadLoop);
     createVMThread("Reference Handler", referenceHandlerThreadLoop);
@@ -2582,6 +2470,7 @@ int initialiseGC(InitArgs *args) {
        can be changed via the command line */
     compact_override = args->compact_specified;
     compact_value = args->do_compact;
+    //compact_value = FALSE;
     return TRUE;
 }
 
@@ -2608,12 +2497,13 @@ void *gcMalloc(int len) {
     /* Grab the heap lock, hopefully without having to
        wait for it to avoid disabling suspension */
     self = threadSelf();
+
     if(!tryLockVMLock(heap_lock, self)) {
         disableSuspend(self);
         lockVMLock(heap_lock, self);
         enableSuspend(self);
     }
-
+    //if(testing_mode)jam_printf("<GC Lock VM>\n");
     /* Scan freelist looking for a chunk big enough to
        satisfy allocation request */
 
@@ -2622,6 +2512,11 @@ void *gcMalloc(int len) {
        tries = 0;
 #endif
         while(*chunkpp) {
+          if(*chunkpp == (*chunkpp)->next){
+            jam_printf("Someting wrong in freelist. Will be infinite loop now... %p nextnext:%p \n",
+                      *chunkpp,((*chunkpp)->next)->next);
+            return NULL;
+          }
             uintptr_t len = (*chunkpp)->header;
 
             if(len == n) {
@@ -2641,6 +2536,7 @@ void *gcMalloc(int len) {
                 if(rem->header >= MIN_OBJECT_SIZE) {
                     rem->next = found->next;
                     *chunkpp = rem;
+                    //if(testing_mode)jam_printf("<GC chunkpp:%p next:%p>\n",*chunkpp,&(*chunkpp)->next);
                 } else
                     *chunkpp = found->next;
 
@@ -2768,7 +2664,7 @@ got_it:
     ret_addr = ((char*)found)+HEADER_SIZE;
     memset(ret_addr, 0, n-HEADER_SIZE);
     unlockVMLock(heap_lock, self);
-
+    //if(testing_mode)jam_printf("<GC chunkpp:%p next:%p>\n",*chunkpp,&(*chunkpp)->next);
     return ret_addr;
 }
 
@@ -2811,7 +2707,7 @@ Object *allocObject(Class *class) {
         if(IS_SPECIAL(cb))
             SET_SPECIAL_OB(ob);
 
-        //if(class < 0x7f660022e000 ) jam_printf("<ALLOC: allocated %s object @%p class @%p>\n", cb->name, ob ,class);
+        //if(testing_mode) jam_printf("<ALLOC: allocated %s object @%p class @%p>\n", cb->name, ob ,class);
     }
 
     return ob;
@@ -2860,30 +2756,17 @@ int recoveryObject(){
     if(IS_IMAGE_EXIST){
       if(testing_mode) jam_printf("Recovery persistence object\n");
       /*
-      Thread *self = threadSelf();
-      if(testing_mode) jam_printf("Current thread is %p\n",self);
-      lockVMLock(has_fnlzr_lock, self);
-      lockVMWaitLock(run_finaliser_lock, self);
-      lockVMWaitLock(reference_lock, self);
-      disableSuspend(self);
-      suspendAllThreads(self);*/
-      //doMark(self,TRUE);
-      //if(testing_mode) scanHeap(TRUE);
-      //clearMarkBits();
+      clearMarkBits();
+      if(oom) MARK(oom, HARD_MARK);
       markBootClasses();
       markJNIGlobalRefs();
-      //scanThreads();
       if(IS_HASH_EXIST) markPersistenceObj();
+      //scanThreads();
       scanHeapAndMark(TRUE);
-      //recoverySweep(NULL);
-      /* Restart the world */
-      //resumeAllThreads(self);
-      //enableSuspend(self);
-      //if(testing_mode) scanHeap(TRUE);
-      /* Release the locks
-      unlockVMLock(has_fnlzr_lock, self);
-      unlockVMWaitLock(reference_lock, self);
-      unlockVMWaitLock(run_finaliser_lock, self);*/
+      recoverySweep(NULL);
+      //reinitialiseSystemClass();*/
+      initClassLoaderTable();
+      gc1();
       return TRUE;
     }
     return TRUE;
@@ -2902,6 +2785,7 @@ int recoverySystems(){
 
 int reCommit(Logs *log){
   int i = 0;
+  jam_printf("reCommit\n");
   while(log[i].handle != NULL){
     log[i].handle = log[i].value;
     i++;
@@ -3292,7 +3176,9 @@ void expandNVM(){
 
 /* XXX NVM CHANGE 004.001 - SysMalloc */
 void *sysMalloc_persistent(int size){
+  clock_t start,end;
 	if (is_persistent){
+    start = clock();
 		int n = size < sizeof(void*) ? sizeof(void*) : size;
 		void *ret_addr = NULL;
 		nvmChunk *found = NULL;
@@ -3348,6 +3234,8 @@ void *sysMalloc_persistent(int size){
 		memset(ret_addr, 0, found->chunkSize);
     msync_nvm();
 		//msync(nvm, nvmCurrentSize, MS_SYNC);
+    end = clock();
+    if(testing_mode) sysMalloctooktime += (double)(end-start)/CLOCKS_PER_SEC;
 		return ret_addr;
 	}else
 		return sysMalloc(size);
@@ -3449,6 +3337,7 @@ void sysExit(){
 /*	XXX NVM CHANGE 009.001.001	*/
 unsigned long get_chunkpp()
 {
+  jam_printf("<Alloc chunkpp:%p next:%p>\n",*chunkpp,(*chunkpp)->next);
 	return (unsigned long)*chunkpp;
 }
 
@@ -3498,6 +3387,14 @@ int is_first_exp(){
 }
 
 int is_abnormal_term(){
-  if(nomal_end) return FALSE;
-  else TRUE;
+  if(nomal_end){
+    return FALSE;
+  }else{
+    if(testing_mode) jam_printf("Nomal end flags isnt up\n");
+    TRUE;
+  }
+}
+
+void print_sysMalloc_tooktime(){
+  jam_printf("sysMalloc_persistent took %.6f msec\n",sysMalloctooktime*1000);
 }

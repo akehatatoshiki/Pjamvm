@@ -150,14 +150,18 @@ static Class *addClassToHash(Class *class, Object *class_loader) {
     /* Add if absent, no scavenge, locked */
     if(bootc){
       findHashEntry((*table), class, entry, TRUE, FALSE, TRUE, boot_name, TRUE );
+      OPC *ph_values = get_opc_ptr();
+      ph_values->boot_classes_hash_count = (*table).hash_count;
+      msync_nvm();
       msync_class(table);
     }else{
       findHashEntry((*table), class, entry, TRUE, FALSE, TRUE, class_name, TRUE );
       class_HC = table->hash_count;
+      OPC *ph_values = get_opc_ptr();
+      ph_values->classes_hash_count = class_HC;
+      msync_nvm();
       msync_class(table);
-      //if(testing_mode)jam_printf("added :%s,%p,count:%d\n",CLASS_CB(entry)->name,entry,class_HC);
     }
-    //printf("added :%s,%p\n",CLASS_CB(entry)->name,entry);
     return entry;
 }
 
@@ -1689,6 +1693,9 @@ void defineBootPackage(char *classname, int index) {
 
         /* Add if absent, no scavenge, locked */
         findHashEntry(boot_packages, package, hashed, TRUE, FALSE, TRUE, bootp_name, TRUE);
+        OPC *ph_value = get_opc_ptr();
+        ph_value->boot_packages_hash_count = boot_packages.hash_count;
+        msync_nvm();
         msync_class(&boot_packages);
 
 

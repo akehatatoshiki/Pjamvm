@@ -105,11 +105,17 @@ int utf8Comp(char *ptr, char *ptr2) {
 char *findHashedUtf8(char *string, int add_if_absent) {
     char *interned = NULL;
     findHashEntry(hash_table, string, interned, add_if_absent, FALSE, TRUE, utf8_name, TRUE);
+    OPC *ph_values = get_opc_ptr();
+    ph_values->utf8_hash_count = get_utf8_HC();
+    msync_nvm();
    	return interned;
 }
 char *findHashedNativeMethodUtf8(char *string, int add_if_absent) {
     char *interned = NULL;
     findHashEntry(native_hash_table, string, interned, add_if_absent, FALSE, TRUE, native_name, TRUE);
+    OPC *ph_values = get_opc_ptr();
+    ph_values->utf8_native_hash_count = get_utf8_native_HC();
+    msync_nvm();
    	return interned;
 }
 void *getHashedNativeMethodUtf8() {

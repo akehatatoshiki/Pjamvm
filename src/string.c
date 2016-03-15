@@ -114,7 +114,9 @@ Object *findInternedString(Object *string) {
     /* Add if absent, no scavenge, locked */
     /* XXX NVM CHANGE 006.003.007  */
     findHashEntry(hash_table, string, interned, TRUE, FALSE, TRUE, string_name, TRUE);
-
+    OPC *ph_values = get_opc_ptr();
+    ph_values->string_hash_count = get_string_HC();
+    msync_nvm();
     return interned;
 }
 

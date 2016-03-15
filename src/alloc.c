@@ -1386,7 +1386,7 @@ out_last_free:
 
     /* Add chunk onto the freelist only if it's
        large enough to hold an object */
-    if(curr->header >= MIN_OBJECT_SIZE) {
+    if(curr >= MIN_OBJECT_SIZE) {
         last->next = curr;
         last = curr;
     }
@@ -2503,7 +2503,6 @@ void *gcMalloc(int len) {
         lockVMLock(heap_lock, self);
         enableSuspend(self);
     }
-    //if(testing_mode)jam_printf("<GC Lock VM>\n");
     /* Scan freelist looking for a chunk big enough to
        satisfy allocation request */
 
@@ -2664,7 +2663,9 @@ got_it:
     ret_addr = ((char*)found)+HEADER_SIZE;
     memset(ret_addr, 0, n-HEADER_SIZE);
     unlockVMLock(heap_lock, self);
-    //if(testing_mode)jam_printf("<GC chunkpp:%p next:%p>\n",*chunkpp,&(*chunkpp)->next);
+    update_opc_mem();
+    msync_heap();
+
     return ret_addr;
 }
 
@@ -3318,11 +3319,17 @@ void msync_nvm(){
   }
 }
 
+void msync_heap(){
+  if(msync(heapmem,heapsize,MS_SYNC) != 0){
+    printf("%d\n",errno);
+    perror("msync failed. Couldnt sync image file\n");
+  }
+}
+
+
 void sysExit(){
-  if(testing_mode) jam_printf("VM will be shutdown soon. heapmem:%p,nvm:%p\n",heapmem,nvm-sizeof(OPC));
+  //if(testing_mode) jam_printf("VM will be shutdown soon. heapmem:%p,nvm:%p\n",heapmem,nvm-sizeof(OPC));
   if(is_persistent  &&
-     //msync_class()  &&
-     //msync_string() &&
      msync_utf8()   &&
      msync(hash,hashsize,MS_SYNC) == 0 &&
      msync(heapmem,heapsize,MS_SYNC) == 0 &&
@@ -3337,7 +3344,7 @@ void sysExit(){
 /*	XXX NVM CHANGE 009.001.001	*/
 unsigned long get_chunkpp()
 {
-  jam_printf("<Alloc chunkpp:%p next:%p>\n",*chunkpp,(*chunkpp)->next);
+  //jam_printf("<Alloc chunkpp:%p next:%p>\n",*chunkpp,(*chunkpp)->next);
 	return (unsigned long)*chunkpp;
 }
 
@@ -3379,6 +3386,17 @@ int get_has_finaliser_size(){
 
 Object ** get_has_finaliser_list(){
 	return has_finaliser_list;
+}
+
+void update_opc_mem(){
+  OPC *ph_values = get_opc_ptr();
+  ph_values->chunkpp = get_chunkpp();
+  ph_values->freelist_header = get_freelist_header();
+  ph_values->freelist_next = get_freelist_next();
+  ph_values->heapfree = get_heapfree();
+  ph_values->nvmFreeSpace = get_nvmFreeSpace();
+  set_has_finaliser_list();
+  msync_nvm();
 }
 
 int is_first_exp(){

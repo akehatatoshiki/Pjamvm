@@ -1373,6 +1373,7 @@ extern int VMInitialising();
 
 extern void shutdownVM();
 //For the simulation of on disk //
+extern void msync_nvm();
 extern void sysExit();
 extern int msync_utf8();
 extern int msync_string();

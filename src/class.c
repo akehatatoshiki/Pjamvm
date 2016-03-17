@@ -768,6 +768,7 @@ Class *parseClass(char *classname, char *data, int offset, int len,
     }
 
     classblock->state = CLASS_LOADED;
+    msync_heap();
     return class;
 }
 
@@ -1533,6 +1534,7 @@ void linkClass(Class *class) {
 
 unlock:
    objectUnlock(class);
+   msync_heap();
 }
 
 Class *initClass(Class *class) {
@@ -1646,7 +1648,7 @@ set_state_and_notify:
 
    objectNotifyAll(class);
    objectUnlock(class);
-
+   msync_heap();
    return state == CLASS_BAD ? NULL : class;
 }
 

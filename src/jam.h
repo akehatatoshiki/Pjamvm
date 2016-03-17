@@ -1273,6 +1273,7 @@ extern void createJavaThread(Object *jThread, long long stack_size);
 extern void mainThreadSetContextClassLoader(Object *loader);
 extern void mainThreadWaitToExitVM();
 extern void uncaughtException();
+extern void exitVMforPowerfailture();
 extern void exitVM(int status);
 extern void scanThreads();
 
@@ -1374,6 +1375,7 @@ extern int VMInitialising();
 extern void shutdownVM();
 //For the simulation of on disk //
 extern void msync_nvm();
+extern void msync_heap();
 extern void sysExit();
 extern int msync_utf8();
 extern int msync_string();

@@ -517,6 +517,7 @@ int initialiseAlloc(InitArgs *args) {
         return FALSE;
       }
     }else{
+      ph_value->flags_nomalend = FALSE;
       if((fd_img = open(imgpath,O_RDWR|O_CREAT,S_IRUSR|S_IWUSR)) == -1){
         perror("Couldn't create memory image files. Check your image path.");
         return FALSE;
@@ -565,6 +566,7 @@ int initialiseAlloc(InitArgs *args) {
         if(testing_mode) jam_printf("Nomal end flags isnt up\n");
         nomal_end = FALSE;
         first_ex = FALSE;
+        recoverySystems();
       } else {
         nomal_end = TRUE;
       }
@@ -2756,16 +2758,6 @@ Object *allocObjectArray(Class *element_class, int length) {
 int recoveryObject(){
     if(IS_IMAGE_EXIST){
       if(testing_mode) jam_printf("Recovery persistence object\n");
-      /*
-      clearMarkBits();
-      if(oom) MARK(oom, HARD_MARK);
-      markBootClasses();
-      markJNIGlobalRefs();
-      if(IS_HASH_EXIST) markPersistenceObj();
-      //scanThreads();
-      scanHeapAndMark(TRUE);
-      recoverySweep(NULL);
-      //reinitialiseSystemClass();*/
       initClassLoaderTable();
       gc1();
       return TRUE;
@@ -2776,11 +2768,9 @@ int recoveryObject(){
 
 int recoverySystems(){
   if(IS_IMAGE_EXIST){
-    jam_printf("recoverySystems\n");
-    //recoveryObject();
+    if(testing_mode) jam_printf("recoverySystems\n");
     reinitialiseSystemClass();
     return scanHashforRecovery();
-    //return TRUE;
   }
 }
 
@@ -2971,7 +2961,6 @@ void gcMemFree(void *addr) {
         munmap(mem, size);
     }
 }
-//XXX NVM
 
 unsigned long valgrind_addr(unsigned long addr,char* str){
 
@@ -3045,8 +3034,6 @@ void *pMemMalloc(int n, char* str, int create_file) {
 		}
 		if(testing_mode == TRUE)	jam_printf("Allocated %s at %p with size %d\n", str, mem, size);
     close(fd);
-		//msync(mem, size, MS_SYNC);
-    //free(str);
 	}else{
 		mem = mmap(0, size, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON, -1, 0);
 

@@ -122,7 +122,7 @@ int initVM(InitArgs *args) {
              initialiseGC(args)  &&
              reinitialiseNativeMethods();
 
-    if(status && args->persistence && is_abnormal_term()) recoverySystems();
+    //if(status && args->persistence && is_abnormal_term()) recoverySystems();
     //if(status && args->persistence) recoveryObject();
     VM_initing = FALSE;
     return status;

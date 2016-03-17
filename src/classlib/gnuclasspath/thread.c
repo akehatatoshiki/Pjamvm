@@ -146,6 +146,7 @@ void classlibSignalThread(Thread *self) {
     sigemptyset(&mask);
     sigaddset(&mask, SIGQUIT);
     sigaddset(&mask, SIGINT);
+    sigaddset(&mask, SIGPWR);
 
     disableSuspend0(self, &self);
     for(;;) {
@@ -155,8 +156,11 @@ void classlibSignalThread(Thread *self) {
         if(sig == SIGINT)
             exitVM(0);
 
+        if(sig == SIGPWR)
+            exitVMforPowerfailture();
+
+
         /* It must be a SIGQUIT.  Do a thread dump */
         printThreadsDump(self);
     }
 }
-

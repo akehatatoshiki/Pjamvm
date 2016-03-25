@@ -1242,8 +1242,8 @@ Object *runningThreadObjects() {
 }
 
 void exitVMforPowerfailture(){
-  if(is_persistent == TRUE){
-    if(testing_mode) jam_printf("Power failture occurred! \n");
+  if(is_persistent){
+    jam_printf("****  Power failture occurred! ****\n");
     OPC *ph_values = get_opc_ptr();
     ph_values->chunkpp = get_chunkpp();
     ph_values->freelist_header = get_freelist_header();
@@ -1252,22 +1252,14 @@ void exitVMforPowerfailture(){
     ph_values->nvmFreeSpace = get_nvmFreeSpace();
     ph_values->java_lang_Class =  get_java_lang_class();
     ph_values->ldr_vmdata_offset = get_ldr_vmdata_offset();
-    ph_values->boot_classes_hash_count = get_BC_HC();
-    ph_values->boot_packages_hash_count = get_BP_HC();
-    ph_values->string_hash_count = get_string_HC();
-    ph_values->utf8_hash_count = get_utf8_HC();
-    ph_values->utf8_native_hash_count = get_utf8_native_HC();
-    ph_values->classes_hash_count = get_CL_HC();
-    memcpy(ph_values->prim_classes, get_prim_classes(), sizeof(ph_values->prim_classes));
-    ph_values->has_finaliser_count = get_has_finaliser_count();
-    ph_values->has_finaliser_size = get_has_finaliser_size();
-    ph_values->has_finaliser_list = sysMalloc_persistent(ph_values->has_finaliser_size*sizeof(Object*));
-    memcpy(ph_values->has_finaliser_list, get_has_finaliser_list(), ph_values->has_finaliser_size*sizeof(Object*));
     if(msync(ph_values,sizeof(ph_values),MS_SYNC) != 0) perror("msync(sysExit)");
     ph_values->flags_nomalend = FALSE;
-    sysExit();
+    msync_utf8();
+    msync_nvm();
+    msync_heap();
+    jamvm_exit(0);
   }else{
-    exitVM(0);
+    exitVM(1);
   }
 }
 

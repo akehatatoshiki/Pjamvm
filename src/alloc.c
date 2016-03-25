@@ -566,7 +566,7 @@ int initialiseAlloc(InitArgs *args) {
         if(testing_mode) jam_printf("Nomal end flags isnt up\n");
         nomal_end = FALSE;
         first_ex = FALSE;
-        recoverySystems();
+        //recoverySystems();
       } else {
         nomal_end = TRUE;
       }
@@ -3359,7 +3359,7 @@ unsigned int get_heapfree(){
 
 /*	XXX NVM CHANGE 009.001.006	*/
 unsigned int get_nvmFreeSpace(){
-  if(testing_mode) jam_printf("Used %d byte from SystemHeap\n",alignSize(NVM_INIT_SIZE)-nvmFreeSpace);
+  //if(testing_mode) jam_printf("Used %d byte from SystemHeap\n",alignSize(NVM_INIT_SIZE)-nvmFreeSpace);
 	return nvmFreeSpace;
 }
 

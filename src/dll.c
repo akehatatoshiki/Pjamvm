@@ -249,14 +249,6 @@ int initialiseDll(InitArgs *args) {
     /* XXX NVM CHANGE 005.001.004 - DLL HT - N */
     initHashTable(hash_table, HASHTABSZE, TRUE, dll_ht_name, FALSE);
 
-
-    /*if(args->trace_jni_sigs) {
-        sig_trace_fd = fopen("jni-signatures", "w");
-        if(sig_trace_fd == NULL) {
-            perror("Couldn't open signatures file for writing");
-            return FALSE;
-        }
-    }*/
 #endif
 
     /* Set the boot path */
